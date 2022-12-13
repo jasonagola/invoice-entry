@@ -14,7 +14,7 @@ const { default: axios } = require('axios');
 dotenv.config();
 
 const client = new Client({
-    accessToken: 'EAAAECtA59bweiwrqwC8v22ykyvKMNabTQhGNrIO8eGMIqYj4-8wnpFkuQadlg54',
+    accessToken: process.env.SQUARE_ACCESS_TOKEN,
     environment: Environment.Production
 });
 
