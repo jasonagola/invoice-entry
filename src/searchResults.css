@@ -1,0 +1,22 @@
+#searchWindow {
+    height: 100vh;
+    border: 5px solid black
+}
+
+#searchResults {
+    width: 100%;
+}
+
+table {
+    width: 100%
+}
+
+table tr:nth-child(even) {
+    background-color: #FAFAF9;
+
+}
+
+table tr:nth-child(odd) {
+    background-color: #E8E8E8;
+
+}
