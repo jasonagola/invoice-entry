@@ -1,7 +1,6 @@
 import React from 'react'
 
 function ItemVariation(props) {
-    console.log(props)
 
     return (
         <div>

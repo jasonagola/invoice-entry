@@ -14,7 +14,7 @@ const { default: axios } = require('axios');
 dotenv.config();
 
 const client = new Client({
-    accessToken: process.env.SQUARE_ACCESS_TOKEN,
+    accessToken: SQUARE_ACCESS_TOKEN,
     environment: Environment.Production
 });
 
@@ -52,17 +52,19 @@ app.get('/searchItem', async (req, res) => {
     }
 })
 
-/////Moving functionality to Node puppeteer solution with cookies and 
-// app.get('/loadInvoice', async (req, res) => {
-    
-//     // const invoiceUrl = req.query.invoiceUrl
+////Put Need to Create Form with dynamic entry for multiple variations
+// app.put('/createCatalogObject', async (req, res) => {
 //     try {
-//         console.log('Hello')
-//         const invoicehtml = await axios.get('https://www.qbp.com/qbponlinestorefront/account/history/order/detail/0005Z66L?year=2022&month=12&page=1')
-//         res.send(invoicehtml.data)
-//         // res.send(invoicehtml)
-//     } catch(error) {
-//         console.log(error)
+//         const response = await client.catalopApi.upsertCatalogObject({
+//             idempotencyKey: '///////////',
+//             object: {
+//                 type: 'ITEM',
+//                 id: '#New_Item',
+//                 itemData: {
+
+//                 }
+//             }
+//         })
 //     }
 // })
 

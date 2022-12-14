@@ -1,21 +1,16 @@
-import APICaller from './APICaller';
-import SearchResults from './searchResults'
 import './App.css';
-import PageLoader from './PageLoader';
-import QBPInvoice from './QBPInvoice';
-import LocalInvoice from './localInvoice';
 import GetInvoice from './GetInvoice';
+import ItemMatch from './squareItemMatch';
+import ItemCreator from './createNewItem';
 
 function App() {
   return (
     <div className="App">
       <header> </header>
-      <APICaller/>
-      {/* <SearchResults/> */}
-      {/* <PageLoader/> */}
-      <QBPInvoice/>
-      {/* <LocalInvoice/> */}
+
       <GetInvoice/>
+      <ItemMatch search={'TR6307'}/>
+      <ItemCreator></ItemCreator>
     </div>
   );
 }
