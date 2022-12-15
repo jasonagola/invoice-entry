@@ -1,4 +1,5 @@
 const JSONBig = require('json-bigint');
+const puppeteer = require('puppeteer')
 const express = require('express');
 const cors = require('cors')
 const db = require('./databaseConfig')
@@ -56,6 +57,28 @@ app.get('/searchItem', async (req, res) => {
     }
 })
 
+
+///////Scraping
+app.get('/JBI/Invoices', async (req, res) => {
+    try { 
+        const browser = await puppeteer.launch({headless: false});
+        const page = await browser.newPage();
+        await page.goto('https://www.jbi.bike/site/login.php')
+        await page.waitForSelector('#fld1')
+        await page.type('#fld1', '120208')
+        await page.type('#fld2', 'localbikeshopnfk')
+        await page.type('#fld3', 'FuckTrek2406')
+        await page.evaluate(() => {
+            document.querySelector("#select-all-checkbox").parentElement.click();
+          });
+        // await page.click('.btn.btn-primary.form-control')
+        // await page.goto(url)
+    } catch(error) {
+        console.log(error)
+    }
+})
+
+///////Database Queries
 app.get("/db/get", (req, res) => {
     db.query("SELECT * FROM posts", (err, result) => {
         if (err) {

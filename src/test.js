@@ -3,17 +3,16 @@ import store from './features/store'
 import {updateSquareStatus} from './features/loadedInvoice/loadedInvoiceSlice'
 import { getPrices } from './apiCalls'
 import {sampleInvoice} from './getMSRP'; 
+import {getDatabase} from './apiCalls'
+import { loadJBIInvoices } from './apiCalls'
 
 function TestBehavior() {
-    const url = '/qbponlinestorefront/p/MA2066'
-    const id = 'MA2066'
-
-    const runGetPrices = () => {
-        getPrices(id, url)
+    const runTest = () => {
+        loadJBIInvoices()
     }
 
     return (
-        <button onClick={runGetPrices}>GET SOME PRICES</button>
+        <button onClick={runTest}>Access Database</button>
     )
 
 }

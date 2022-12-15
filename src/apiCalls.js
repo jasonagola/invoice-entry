@@ -1,6 +1,7 @@
 ////Square APIs
 import axios from 'axios';
 
+const devServer = 'http://localhost:8000'
 
 //search for Item with string
 export async function searchItem(searchString) {
@@ -74,3 +75,38 @@ export async function LoadInvoice(invoiceUrl) {
             console.log(error)
         }
  }
+
+ ///loadJBIInvoices
+
+ export async function loadJBIInvoices() {
+     const url = devServer +'/JBI/Invoices'
+     console.log(url)
+     const options = {
+         method: 'GET',
+         url: devServer + '/JBI_Invoices',
+     }
+     const response = await axios.request(options)
+        try {
+            console.log(response.data)
+            return response.data
+        } catch(error) {
+            console.log(error)
+        }
+ }
+
+
+ /////Database
+ export async function getDatabase() {
+     const options = {
+         method: 'GET',
+         url: 'http://localhost:8000/db/get',
+     };
+     const response = await axios.request(options)
+        try {
+            console.log(response)
+        } catch(error) {
+            console.log(error)
+        }
+
+     }
+ 
