@@ -68,11 +68,12 @@ app.get('/JBI/Invoices', async (req, res) => {
         await page.type('#fld1', '120208')
         await page.type('#fld2', 'localbikeshopnfk')
         await page.type('#fld3', 'FuckTrek2406')
-        await page.evaluate(() => {
-            document.querySelector("#select-all-checkbox").parentElement.click();
-          });
+        await page.click("#fld4")
+        await page.click('.checkbox input')
+        await page.click('https://www.jbi.bike/site/order_history_received.php')
         // await page.click('.btn.btn-primary.form-control')
         // await page.goto(url)
+        await browser.close()
     } catch(error) {
         console.log(error)
     }

@@ -83,7 +83,7 @@ export async function LoadInvoice(invoiceUrl) {
      console.log(url)
      const options = {
          method: 'GET',
-         url: devServer + '/JBI_Invoices',
+         url: url
      }
      const response = await axios.request(options)
         try {
