@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { getLoadedInvoice } from './features/loadedInvoice/loadedInvoiceSlice';
 import ItemMatch from './squareItemMatch';
+import './InvoiceDisplay.css'
 
 function InvoiceDisplay(props) {
     

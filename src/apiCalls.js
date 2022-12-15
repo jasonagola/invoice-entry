@@ -58,13 +58,12 @@ export async function LoadInvoice(invoiceUrl) {
  }
 
  ////getPrice
- export async function getPrice(itemUrl) {
-    console.log(itemUrl)
+ export async function getPrices(invoice) {
     const options = {
         method: 'GET',
-        url: 'https://localhost:8100/getPrice',
+        url: 'http://localhost:8100/getPrices',
         params: {
-            itemUrl: itemUrl
+            invoice: invoice
         }
     }
     const response = await axios.request(options)
