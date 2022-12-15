@@ -1,6 +1,11 @@
 const JSONBig = require('json-bigint');
 const express = require('express');
 const cors = require('cors')
+const db = require('./databaseConfig')
+require('dotenv').config()
+
+
+
 const PORT = 8000
 const app = express();
 
@@ -8,13 +13,12 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }))
 
-const dotenv = require('dotenv');
+
 const { Client, Envirnment, Environment } = require('square');
 const { default: axios } = require('axios');
-dotenv.config();
 
 const client = new Client({
-    accessToken: SQUARE_ACCESS_TOKEN,
+    accessToken: 'EAAAECtA59bweiwrqwC8v22ykyvKMNabTQhGNrIO8eGMIqYj4-8wnpFkuQadlg54',
     environment: Environment.Production
 });
 
@@ -51,6 +55,20 @@ app.get('/searchItem', async (req, res) => {
         console.log(error)
     }
 })
+
+app.get("/db/get", (req, res) => {
+    db.query("SELECT * FROM posts", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+    res.send(result)
+    })
+})
+
+
+
+
+
 
 ////Put Need to Create Form with dynamic entry for multiple variations
 // app.put('/createCatalogObject', async (req, res) => {
