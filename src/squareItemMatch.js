@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { searchItem } from './apiCalls'
+import { updateSquareStatus } from './features/loadedInvoice/loadedInvoiceSlice'
+import store from './features/store'
 
+
+///Can afford a logic rewrite so as not to Object.values twice for empty and for item iteration. Can return out of function after match found
 
 function ItemMatch(props) {
     const [inSquare, setInSquare] = useState('awaiting...')
@@ -20,6 +24,7 @@ function ItemMatch(props) {
                 const variationData = variation.itemVariationData
                 if (searchString === variationData.sku) {
                     setInSquare('Match Found')
+                    store.dispatch(updateSquareStatus({itemID:searchString, inSquare: true}))
                     console.log(`Match found Item: ${item.name} has variation ${variationData.name} with SKU:${variationData.sku} that matches your search term`)
                 }
             }) 

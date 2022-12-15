@@ -13,19 +13,27 @@ const options = {
             return {invoice}
         },
         updateSquareStatus: (state, action) => {
-            const {itemID, inSquare} = action.payload
-            return {...state, itemID: {...state.loadedInvoice.invoice.itemID, inSquare: inSquare}}
+            console.log(action.itemID)
+            console.log(action.payload.itemID)
+            const updatedItem = {...state.invoice[action.payload.itemID], inSquare: action.payload.inSquare}
+            return {...state, invoice: {
+                    ...state.invoice, [action.payload.itemID]: updatedItem}}
         }
 
     }
 }
 
+
+export const loadedInvoiceSlice = createSlice(options)
+
+
+export const {loadInvoice, updateSquareStatus} = loadedInvoiceSlice.actions
+
+export default loadedInvoiceSlice.reducer
+
+
+/////Selectors
 export const getLoadedInvoice = (state) => {
     return state.loadedInvoice
 }
 
-
-export const loadedInvoiceSlice = createSlice(options)
-export const {loadInvoice} = loadedInvoiceSlice.actions
-
-export default loadedInvoiceSlice.reducer
