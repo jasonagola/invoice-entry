@@ -81,13 +81,30 @@ app.get('/JBI/Invoices', async (req, res) => {
 
 ///////Database Queries
 app.get("/db/get", (req, res) => {
-    db.query("SELECT * FROM posts", (err, result) => {
+    db.query("SELECT * FROM Bikes", (err, result) => {
         if (err) {
             console.log(err)
         }
     res.send(result)
     })
 })
+
+app.put("/db/newBike", (req, res) => {
+    const color = req.query.color
+    const make = req.query.make
+    const model = req.query.model
+    db.query(
+        "INSERT INTO Bikes (bike_ID, color, make, model) VALUES (null, 'White', 'Tesch', 'SR22')",
+        (err, result) => {
+          if (err) {
+            console.log(error);
+          } else {
+            console.log(result)
+            // res.send(result);
+          }
+        }
+      );
+    });
 
 
 

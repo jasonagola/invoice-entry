@@ -110,3 +110,21 @@ export async function LoadInvoice(invoiceUrl) {
 
      }
  
+
+export async function insertNewBike(color, make, model) {
+    const options ={
+        method: 'PUT',
+        url: devServer + '/db/newBike', 
+        params: {
+            color: color, 
+            make: make,
+            model: model
+        }
+    }
+    const response = axios.request(options)
+        try {
+            console.log(response)
+        } catch(error) {
+            console.log(response)
+        }
+}

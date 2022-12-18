@@ -4,17 +4,18 @@ import {updateSquareStatus} from './features/loadedInvoice/loadedInvoiceSlice'
 import { getPrices } from './apiCalls'
 import {sampleInvoice} from './getMSRP'; 
 import {getDatabase} from './apiCalls'
-import { loadJBIInvoices } from './apiCalls'
+import { loadJBIInvoices, insertNewBike } from './apiCalls'
 
 function TestBehavior() {
     const runTest = () => {
-        loadJBIInvoices()
+        insertNewBike('Pink', 'Tesch', 'SR22')
+        // getDatabase()
+
     }
 
     return (
         <button onClick={runTest}>Access Database</button>
     )
-
 }
 
 export default TestBehavior
