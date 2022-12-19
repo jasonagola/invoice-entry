@@ -122,7 +122,6 @@ export async function getAllDatabaseInvoices() {
         } catch(error) {
             console.log(error)
         }
-
      }
  
 ///Upload new Invoice
@@ -146,6 +145,22 @@ export async function insertNewInvoice(invoiceId, vendor, invoiceDate, invoiceTo
         }
 }
 
+///Check When Invoices Last Scraped 
+export async function getInvoiceScrapeStatus() {
+    const options = {
+        method: 'GET',
+        url: devServer + '/db/status/invoiceScraper'
+    }
+    const response = await axios.request(options)
+        try {
+            console.log(response)
+            return response.data
+        } catch(error) {
+            console.log(error)
+        }
+}
+
+///Insert New Bike
 export async function insertNewBike(color, make, model) {
     const options ={
         method: 'PUT',

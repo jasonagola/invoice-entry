@@ -2,15 +2,41 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './features/store'
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import App from './routes/App'
+import InvoiceBrowser from './routes/InvoiceBrowser'
+import InvoiceViewer from './routes/InvoiceViewer';
+import SquareItemBrowser from './routes/SquareItemBrowser';
 import reportWebVitals from './reportWebVitals';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+    children: [
+      {
+        path:'/InvoiceBrowser',
+        element: <InvoiceBrowser/>
+      },
+      {
+        path: '/InvoiceViewer',
+        element: <InvoiceViewer/>
+      },
+      {
+        path: '/SquareItemBrowser',
+        element: <SquareItemBrowser/>
+      }
+    ],
+  },
+  
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <RouterProvider router={router}/>
     </React.StrictMode>
   </Provider>
 );

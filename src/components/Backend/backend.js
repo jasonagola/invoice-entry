@@ -19,7 +19,7 @@ const { Client, Envirnment, Environment } = require('square');
 const { default: axios } = require('axios');
 
 const client = new Client({
-    accessToken: SQUARE,
+    accessToken: process.env.SQUARAE_ACCESS_TOKEN,
     environment: Environment.Production
 });
 
@@ -111,6 +111,22 @@ app.put('/db/invoices/insert', (req, res) => {
 })
 ///Change Invoice Processed State
 
+//////////Status Table
+app.get('/db/status/invoiceScraper', (req, res) => {
+    console.log('Getting Status of Invoice Scraper')
+    db.query("SELECT * FROM Status WHERE function = 'invoiceScraper'"),
+    (err, result) => {
+        console.log('Parsing Db return')
+        if (err) {
+            console.log(err)
+            res.send(err)
+        } else {
+            console.log(result)
+            res.send(result)
+        }
+    }
+})
+
 //////////Bike Table
 app.get("/db/get", (req, res) => {
     db.query("SELECT * FROM Bikes", (err, result) => {
@@ -142,7 +158,7 @@ app.put("/db/newBike", (req, res) => {
 
 ///////QBP API
 const baseUrlQBP = 'https://api1.qbp.com/api/1'
-const authQBPHeader = {'X-QBPAPI-KEY': 'QBP'}
+const authQBPHeader = {'X-QBPAPI-KEY': process.env.QBP_API_TOKEN}
 
 ///Return Product Information by SKU
 app.get('/QBP/product/sku', async (req, res) => {
@@ -171,7 +187,7 @@ app.get('/QBP/invoices', async (req, res) => {
                 endDate: req.query.endDate,
                 startDate: req.query.startDate
             },
-            headers: {'X-QBPAPI-KEY': 'QBP'}
+            headers: {authQBPHeader}
         }
         const response = await axios.request(options)
         const responseString = JSONBig.stringify(response.data)
