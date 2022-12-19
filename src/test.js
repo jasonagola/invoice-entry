@@ -1,20 +1,15 @@
-import React from 'react'
-import store from './features/store'
-import {updateSquareStatus} from './features/loadedInvoice/loadedInvoiceSlice'
-import { getPrices } from './apiCalls'
-import {sampleInvoice} from './getMSRP'; 
-import {getDatabase} from './apiCalls'
-import { loadJBIInvoices, insertNewBike } from './apiCalls'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchInvoices, selectAllDatabaseInvoices } from './features/databaseInvoices/databaseInvoicesSlice';
+import store from './features/store';
 
 function TestBehavior() {
     const runTest = () => {
-        insertNewBike('Pink', 'Tesch', 'SR22')
-        // getDatabase()
-
+        
     }
 
     return (
-        <button onClick={runTest}>Access Database</button>
+        <button onClick={runTest}>Run Test</button>
     )
 }
 

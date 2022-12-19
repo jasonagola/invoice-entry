@@ -79,7 +79,39 @@ app.get('/JBI/Invoices', async (req, res) => {
     }
 })
 
-///////Database Queries
+////////////////////Database Queries
+//////////Invoice Table
+///Get Invoices
+app.get('/db/invoices/getAll', (req, res) => {
+    db.query("SELECT * FROM Invoices", (err, result) => {
+        if(err) {
+            console.log(err)
+            return res.send(err)
+        } else {
+            res.send(result)
+        }
+    })
+})
+
+///Post New Invoice
+app.put('/db/invoices/insert', (req, res) => {
+    console.log('Backend Attempting to add new invoice')
+    const {invoiceId, vendor, invoiceDate, invoiceTotal, processed} = req.query
+    db.query(
+        `INSERT INTO Invoices (Invoice_ID, Vendor, Invoice_Date, Invoice_Total, Processed) VALUES (${invoiceId}, '${vendor}', '${invoiceDate}', ${invoiceTotal}, ${processed})`, 
+    (err, result) => {
+        if (err) {
+            console.log(err)
+            return res.send(err.message)
+        } else {
+            console.log(result)
+            res.send(result)
+        }
+    }) 
+})
+///Change Invoice Processed State
+
+//////////Bike Table
 app.get("/db/get", (req, res) => {
     db.query("SELECT * FROM Bikes", (err, result) => {
         if (err) {
@@ -108,7 +140,46 @@ app.put("/db/newBike", (req, res) => {
 
 
 
+///////QBP API
+const baseUrlQBP = 'https://api1.qbp.com/api/1'
+const authQBPHeader = {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
 
+///Return Product Information by SKU
+app.get('/QBP/product/sku', async (req, res) => {
+    try {
+        const options = {
+            method: "GET",
+            url: baseUrlQBP + `/product/sku/${req.query.sku}`,
+            headers: {authQBPHeader}
+        }
+        const response = await axios.request(options)
+        const responseString = JSONBig.stringify(response.data)
+        res.send(responseString)
+    } catch(error) {
+        console.log(error)
+    }   
+}
+)
+
+///Return QBP invoices by Date
+app.get('/QBP/invoices', async (req, res) => {
+    try {
+        const options = {
+            method: "GET",
+            url: baseUrlQBP + '/customer/invoice',
+            params: {
+                endDate: req.query.endDate,
+                startDate: req.query.startDate
+            },
+            headers: {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
+        }
+        const response = await axios.request(options)
+        const responseString = JSONBig.stringify(response.data)
+        res.send(responseString)
+    } catch(error) {
+        console.log(error)
+    }
+})
 
 
 ////Put Need to Create Form with dynamic entry for multiple variations

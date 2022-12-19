@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import store from './features/store'
-import {LoadInvoice} from './apiCalls'
+import {LoadInvoice} from './utils/apiCalls'
 import { loadInvoice } from './features/loadedInvoice/loadedInvoiceSlice';
 import searchResultSlice from './features/searchResults/searchResultSlice';
 import InvoiceDisplay from './InvoiceDisplay';
