@@ -16,9 +16,14 @@ function InvoiceReconciliation() {
     useEffect(() => {
         reconcileQBP()
     }, [databaseInvoices, recentQbpInvoices])
+
+    async function runInvoiceReconciliation() {
+        dispatch(await fetchInvoices())
+        reconcileQBP()
+
+    }
     
     const reconcileQBP = async () => {
-        
         for (let inv of recentQbpInvoices) {
             let match = 0
             for (let invDb of databaseInvoices) {
@@ -38,12 +43,6 @@ function InvoiceReconciliation() {
         }
     
     }
-
-    
-    
-    return (
-        <div>Need to test invoices</div>
-    )
 }
 
 

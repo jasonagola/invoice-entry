@@ -9,12 +9,17 @@ import InvoiceBrowser from './routes/InvoiceBrowser'
 import InvoiceViewer from './routes/InvoiceViewer';
 import SquareItemBrowser from './routes/SquareItemBrowser';
 import reportWebVitals from './reportWebVitals';
+import Dashboard from './Dashboard';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
     children: [
+      {
+        path: "/",
+        element: <Dashboard/>
+      },
       {
         path:'/InvoiceBrowser',
         element: <InvoiceBrowser/>

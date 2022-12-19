@@ -153,7 +153,7 @@ export async function getInvoiceScrapeStatus() {
     }
     const response = await axios.request(options)
         try {
-            console.log(response)
+            // console.log(response)
             return response.data
         } catch(error) {
             console.log(error)

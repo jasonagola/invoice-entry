@@ -114,9 +114,9 @@ app.put('/db/invoices/insert', (req, res) => {
 //////////Status Table
 app.get('/db/status/invoiceScraper', (req, res) => {
     console.log('Getting Status of Invoice Scraper')
-    db.query("SELECT * FROM Status WHERE function = 'invoiceScraper'"),
+    db.query("SELECT * FROM Status WHERE function = 'invoiceScraper'",
     (err, result) => {
-        console.log('Parsing Db return')
+        
         if (err) {
             console.log(err)
             res.send(err)
@@ -124,7 +124,7 @@ app.get('/db/status/invoiceScraper', (req, res) => {
             console.log(result)
             res.send(result)
         }
-    }
+    })
 })
 
 //////////Bike Table

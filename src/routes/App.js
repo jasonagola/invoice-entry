@@ -13,7 +13,6 @@ function App() {
         <h1>Invoice Collector 6000</h1>
         <NavBar/>
       </header>
-      <Dashboard></Dashboard>
       <div id="switchingDisplay">
         <Outlet />
       </div>
