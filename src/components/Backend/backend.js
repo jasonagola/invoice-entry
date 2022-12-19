@@ -19,7 +19,7 @@ const { Client, Envirnment, Environment } = require('square');
 const { default: axios } = require('axios');
 
 const client = new Client({
-    accessToken: 'EAAAECtA59bweiwrqwC8v22ykyvKMNabTQhGNrIO8eGMIqYj4-8wnpFkuQadlg54',
+    accessToken: SQUARE,
     environment: Environment.Production
 });
 
@@ -142,7 +142,7 @@ app.put("/db/newBike", (req, res) => {
 
 ///////QBP API
 const baseUrlQBP = 'https://api1.qbp.com/api/1'
-const authQBPHeader = {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
+const authQBPHeader = {'X-QBPAPI-KEY': 'QBP'}
 
 ///Return Product Information by SKU
 app.get('/QBP/product/sku', async (req, res) => {
@@ -171,7 +171,7 @@ app.get('/QBP/invoices', async (req, res) => {
                 endDate: req.query.endDate,
                 startDate: req.query.startDate
             },
-            headers: {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
+            headers: {'X-QBPAPI-KEY': 'QBP'}
         }
         const response = await axios.request(options)
         const responseString = JSONBig.stringify(response.data)
