@@ -10,10 +10,11 @@ export function convertQbpXMLtoJSON(xmlResponse) {
     return json
 }
 
-export async function getDefaultQbpInvoices() {
-    const todayDate = format(new Date(), 'MM/dd/yyyy')
-    const lastThirtyDaysDate = format(subDays(new Date(), 30), 'MM/dd/yyyy')
-    const response = await getQbpInvoices(todayDate, lastThirtyDaysDate)
+const todayDate = format(new Date(), 'MM/dd/yyyy')
+const lastThirtyDaysDate = format(subDays(new Date(), 30), 'MM/dd/yyyy')
+
+export async function getDefaultQbpInvoices(endDate = lastThirtyDaysDate, startDate = todayDate) {
+    const response = await getQbpInvoices(endDate, startDate)
     const invoicesObject = convertQbpXMLtoJSON(response)
     return invoicesObject
 }

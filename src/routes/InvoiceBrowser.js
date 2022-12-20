@@ -4,6 +4,7 @@ import InvoiceReconciliation from '../InvoiceReconciliation';
 import { useDispatch } from 'react-redux';
 import { fetchInvoices } from '../features/databaseInvoices/databaseInvoicesSlice';
 import DisplayDbInvoices from '../DisplayDbInvoices';
+import QueryQBP from '../queryQBP';
 
 function InvoiceBrowser() {
     const dispatch = useDispatch()
@@ -15,7 +16,9 @@ function InvoiceBrowser() {
         
         <div>
             Invoice Browser
+            <QueryQBP/>
             <DisplayDbInvoices/>
+            <InvoiceReconciliation/>
         </div>
     )
 }

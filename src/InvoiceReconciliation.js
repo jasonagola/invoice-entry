@@ -15,13 +15,7 @@ function InvoiceReconciliation() {
     
     useEffect(() => {
         reconcileQBP()
-    }, [databaseInvoices, recentQbpInvoices])
-
-    async function runInvoiceReconciliation() {
-        dispatch(await fetchInvoices())
-        reconcileQBP()
-
-    }
+    }, [recentQbpInvoices])
     
     const reconcileQBP = async () => {
         for (let inv of recentQbpInvoices) {

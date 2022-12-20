@@ -1,3 +1,17 @@
 .App {
   text-align: center;
 }
+
+table {
+  width: 100%;
+}
+
+table tr:nth-child(even) {
+  background-color: #FAFAF9;
+
+}
+
+table tr:nth-child(odd) {
+  background-color: #E8E8E8;
+
+}

@@ -158,7 +158,7 @@ app.put("/db/newBike", (req, res) => {
 
 ///////QBP API
 const baseUrlQBP = 'https://api1.qbp.com/api/1'
-const authQBPHeader = {'X-QBPAPI-KEY': process.env.QBP_API_TOKEN}
+const authQBPHeader = {}
 
 ///Return Product Information by SKU
 app.get('/QBP/product/sku', async (req, res) => {
@@ -187,7 +187,7 @@ app.get('/QBP/invoices', async (req, res) => {
                 endDate: req.query.endDate,
                 startDate: req.query.startDate
             },
-            headers: {authQBPHeader}
+            headers: {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
         }
         const response = await axios.request(options)
         const responseString = JSONBig.stringify(response.data)
