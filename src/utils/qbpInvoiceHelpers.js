@@ -16,5 +16,6 @@ const lastThirtyDaysDate = format(subDays(new Date(), 30), 'MM/dd/yyyy')
 export async function getDefaultQbpInvoices(endDate = lastThirtyDaysDate, startDate = todayDate) {
     const response = await getQbpInvoices(endDate, startDate)
     const invoicesObject = convertQbpXMLtoJSON(response)
+    console.log(invoicesObject)
     return invoicesObject
 }

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import LoadData from '../LoadData';
-import InvoiceReconciliation from '../InvoiceReconciliation';
 import { useDispatch } from 'react-redux';
-import { fetchInvoices } from '../features/databaseInvoices/databaseInvoicesSlice';
-import DisplayDbInvoices from '../DisplayDbInvoices';
-import QueryQBP from '../queryQBP';
+import { fetchInvoices } from '../../store/databaseInvoices/databaseInvoicesSlice';
+import QueryQBP from '../../queryQBP';
+import InvoiceReconciliation from './InvoiceReconciliation';
+import DisplayDbInvoices from './DisplayDbInvoices';
 
 function InvoiceBrowser() {
     const dispatch = useDispatch()

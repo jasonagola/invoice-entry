@@ -1,9 +1,10 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 
 const options = {
     name: 'loadedInvoice', 
     initialState: {
-
+        vendor: '',
+        invoice: []
     },
 
 
@@ -37,3 +38,12 @@ export const getLoadedInvoice = (state) => {
     return state.loadedInvoice
 }
 
+/////Thunks
+/////design backend path such that /Vendor/loadInvoice and pass parameter as number
+export const loadInvoiceFromVendor = createAsyncThunk('/loadInvoiceFromVendor', async (invoiceRequest) => {
+    console.log(invoiceNumber)
+    const {vendor, invoiceNumber} = invoiceRequest
+    const response = await getInvoiceFromVendor(vendor, invoiceNumber)
+    return response
+    ////Will need to standardize response   
+})

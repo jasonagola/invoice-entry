@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { getInvoiceScrapeStatus } from './utils/apiCalls';
+import { getInvoiceScrapeStatus } from '../utils/apiCalls';
 import {format, isBefore} from 'date-fns'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { invoiceCheckQbp } from './features/foundInvoices/foundInvoicesSlice';
+import { invoiceCheckQbp } from '../store/foundInvoices/foundInvoicesSlice';
 
 function Dashboard() {
     const [invoiceScrapeStatus, setInvoiceScrapeStatus]  = useState()

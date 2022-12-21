@@ -1,15 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './features/store'
+import store from './store/store'
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './routes/App'
-import InvoiceBrowser from './routes/InvoiceBrowser'
-import InvoiceViewer from './routes/InvoiceViewer';
-import SquareItemBrowser from './routes/SquareItemBrowser';
+import InvoiceBrowser from './routes//InvoiceBrowser/InvoiceBrowser'
+import InvoiceViewer from './routes/InvoiceViewer/InvoiceViewer';
+import SquareItemBrowser from './routes/SquareItemBrowser/SquareItemBrowser';
 import reportWebVitals from './reportWebVitals';
-import Dashboard from './Dashboard';
+import Dashboard from './routes/Dashboard';
 
 const router = createBrowserRouter([
   {

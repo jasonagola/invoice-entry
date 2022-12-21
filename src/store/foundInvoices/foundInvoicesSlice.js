@@ -53,9 +53,8 @@ export const selectAllQbpInvoices = (state) => {
 /////Thunks
 export const invoiceCheckQbp = createAsyncThunk('/invoiceCheckQbp', async (dates) => {
     // console.log('finding QBP invoices')
-    console.log(dates)
     const {endDate, startDate} = dates
-    console.log(endDate)
+    
     const response = await getDefaultQbpInvoices(endDate, startDate)
     // console.log(response)
     // console.log(response.invoiceResponse.invoices.invoice)

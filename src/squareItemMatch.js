@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { searchItem } from './utils/apiCalls'
-import { updateSquareStatus } from './features/loadedInvoice/loadedInvoiceSlice'
-import store from './features/store'
+import { updateSquareStatus } from './store/loadedInvoice/loadedInvoiceSlice'
+import store from './store/store'
 
 
 ///Can afford a logic rewrite so as not to Object.values twice for empty and for item iteration. Can return out of function after match found

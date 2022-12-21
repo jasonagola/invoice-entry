@@ -98,7 +98,7 @@ app.put('/db/invoices/insert', (req, res) => {
     console.log('Backend Attempting to add new invoice')
     const {invoiceId, vendor, invoiceDate, invoiceTotal, processed} = req.query
     db.query(
-        `INSERT INTO Invoices (Invoice_ID, Vendor, Invoice_Date, Invoice_Total, Processed) VALUES (${invoiceId}, '${vendor}', '${invoiceDate}', ${invoiceTotal}, ${processed})`, 
+        `INSERT INTO Invoices (Invoice_ID, Vendor, Invoice_Date, Invoice_Total, Processed) VALUES ('${invoiceId}', '${vendor}', '${invoiceDate}', ${invoiceTotal}, ${processed})`, 
     (err, result) => {
         if (err) {
             console.log(err)
@@ -156,7 +156,7 @@ app.put("/db/newBike", (req, res) => {
 
 
 
-///////QBP API
+/////////////////QBP API
 const baseUrlQBP = 'https://api1.qbp.com/api/1'
 const authQBPHeader = {}
 
@@ -177,6 +177,7 @@ app.get('/QBP/product/sku', async (req, res) => {
 }
 )
 
+/////Invoices
 ///Return QBP invoices by Date
 app.get('/QBP/invoices', async (req, res) => {
     try {
@@ -188,13 +189,31 @@ app.get('/QBP/invoices', async (req, res) => {
                 startDate: req.query.startDate
             },
             headers: {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
-        }
+        };
         const response = await axios.request(options)
         const responseString = JSONBig.stringify(response.data)
         res.send(responseString)
     } catch(error) {
         console.log(error)
     }
+})
+
+///Return QBP Invoice by Invoice Number
+app.get('/QBP/invoices/number', async (req, res) => {
+    try {
+        const options = {
+            method: "GET",
+            url: baseUrlQBP + `/customer/invoice/${req.query.invoiceNumber}`,
+            headers: {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
+        };
+        const response = await axios.request(options)
+        console.log(response)
+        const responseString = JSONBig.stringify(response.data)
+        res.send(responseString)
+    } catch(error) {
+        console.log(error)
+        res.send(error)
+        }
 })
 
 

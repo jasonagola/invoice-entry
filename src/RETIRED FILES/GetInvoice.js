@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import store from './features/store'
-import {LoadInvoice} from './utils/apiCalls'
-import { loadInvoice } from './features/loadedInvoice/loadedInvoiceSlice';
-import searchResultSlice from './features/searchResults/searchResultSlice';
-import InvoiceDisplay from './InvoiceDisplay';
+import store from './store/store'
+import {LoadInvoice} from '../utils/apiCalls'
+import { loadInvoice } from './store/loadedInvoice/loadedInvoiceSlice';
+import searchResultSlice from './store/searchResults/searchResultSlice';
+import InvoiceDisplay from '../InvoiceDisplay';
 const cheerio = require('cheerio')
 
 

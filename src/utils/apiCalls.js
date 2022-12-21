@@ -198,6 +198,9 @@ export async function getQbpBySku(sku) {
     }
 }
 
+/////Invoice Functions
+
+///Get invoices within a date range
 export async function getQbpInvoices(endDate, startDate) {
     try {
         const options = {
@@ -206,6 +209,23 @@ export async function getQbpInvoices(endDate, startDate) {
             params: {
                 endDate: endDate,
                 startDate: startDate
+            }
+        }
+        const response = await axios.request(options)
+        return response.data
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+///Get QBP Invoice by Invoice Number
+export async function getQbpInvoiceByNumber(invoiceNumber) {
+    try {
+        const options = {
+            method: 'GET',
+            url: devServer + '/QBP/invoices/number',
+            params: {
+                invoiceNumber: invoiceNumber
             }
         }
         const response = await axios.request(options)

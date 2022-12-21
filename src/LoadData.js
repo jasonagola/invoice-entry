@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchInvoices } from './features/databaseInvoices/databaseInvoicesSlice';
-import { invoiceCheckQbp } from './features/foundInvoices/foundInvoicesSlice';
+import { fetchInvoices } from './store/databaseInvoices/databaseInvoicesSlice';
+import { invoiceCheckQbp } from './store/foundInvoices/foundInvoicesSlice';
 
 function LoadData() {
     /////Add date check to prevent scraping and unneccesary invoice loading. use Database to store log of data retrieval 

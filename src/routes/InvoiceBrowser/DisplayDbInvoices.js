@@ -1,11 +1,11 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import { selectAllDatabaseInvoices } from './features/databaseInvoices/databaseInvoicesSlice'
+import { selectAllDatabaseInvoices } from './store/databaseInvoices/databaseInvoicesSlice'
 import {format} from 'date-fns'
 import './routes/App.css'
 
 function DisplayDbInvoices() {
-    const dbInvoices = useSelector(selectAllDatabaseInvoices)
+    const dbInvoices = useSelector(selectAllDatabaseInvoices())
 
     const handleClick = (e) => {
         console.log(e.target.value)

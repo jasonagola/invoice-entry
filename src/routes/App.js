@@ -1,9 +1,6 @@
 import './App.css';
-import LoadData from '../LoadData'
-import InvoiceReconciliation from '../InvoiceReconciliation';
-import NavBar from '../components/NavBar';
+import NavBar from '../routes/NavBar';
 import {Outlet} from 'react-router-dom';
-import Dashboard from '../Dashboard';
 
 
 function App() {
