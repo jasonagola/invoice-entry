@@ -234,3 +234,29 @@ export async function getQbpInvoiceByNumber(invoiceNumber) {
         console.log(error)
     }
 }
+
+
+////////Invoice By Number with Vendor Passthrough
+export async function getInvoiceFromVendor(vendor, invoiceNumber) {
+    let vendorPath = ''
+    switch (vendor) {
+        case 'QBP':
+            vendorPath = '/QBP/invoices/number'
+            break;
+        case 'JBI':
+            vendorPath = 'JBI/invoices/number'
+    }
+    try {
+        const options = {
+            method: 'GET',
+            url: devServer + vendorPath,
+            params: {
+                invoiceNumber: invoiceNumber
+            }
+        }
+        const response = await axios.request(options)
+        return response.data
+    } catch(error) {
+        console.log(error)
+    }
+}

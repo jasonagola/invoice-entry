@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchInvoices, selectAllDatabaseInvoices } from './store/databaseInvoices/databaseInvoicesSlice';
-import { selectAllQbpInvoices } from './store/foundInvoices/foundInvoicesSlice';
-import { getAllDatabaseInvoices, insertNewInvoice } from './utils/apiCalls';
+import { fetchInvoices, selectAllDatabaseInvoices } from '../../store/databaseInvoices/databaseInvoicesSlice';
+import { selectAllQbpInvoices } from '../../store/foundInvoices/foundInvoicesSlice';
+import { getAllDatabaseInvoices, insertNewInvoice } from '../../utils/apiCalls';
 import {format} from 'date-fns'
-import store from './store/store';
+import store from '../../store/store'
+
 
 function InvoiceReconciliation() {
     ///find differences

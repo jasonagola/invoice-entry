@@ -19,7 +19,7 @@ const { Client, Envirnment, Environment } = require('square');
 const { default: axios } = require('axios');
 
 const client = new Client({
-    accessToken: process.env.SQUARAE_ACCESS_TOKEN,
+    accessToken: process.env.SQUARE_ACCESS_TOKEN,
     environment: Environment.Production
 });
 
@@ -188,7 +188,7 @@ app.get('/QBP/invoices', async (req, res) => {
                 endDate: req.query.endDate,
                 startDate: req.query.startDate
             },
-            headers: {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
+            headers: {'X-QBPAPI-KEY': process.env.QBP_ACCESS_TOKEN}
         };
         const response = await axios.request(options)
         const responseString = JSONBig.stringify(response.data)
@@ -204,7 +204,7 @@ app.get('/QBP/invoices/number', async (req, res) => {
         const options = {
             method: "GET",
             url: baseUrlQBP + `/customer/invoice/${req.query.invoiceNumber}`,
-            headers: {'X-QBPAPI-KEY': '5d3b3aa7-6093-4ef7-b91b-ae51fc093107'}
+            headers: {'X-QBPAPI-KEY': process.env.QBP_ACCESS_TOKEN}
         };
         const response = await axios.request(options)
         console.log(response)

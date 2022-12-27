@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-a {
+#navbar a {
     margin: 30px;
     font-size: 150%;
     font-weight: bold;

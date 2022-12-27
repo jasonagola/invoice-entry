@@ -1,11 +1,11 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import { selectAllDatabaseInvoices } from './store/databaseInvoices/databaseInvoicesSlice'
+import { selectAllDatabaseInvoices } from '../../store/databaseInvoices/databaseInvoicesSlice'
 import {format} from 'date-fns'
-import './routes/App.css'
+import '../../routes/App.css'
 
 function DisplayDbInvoices() {
-    const dbInvoices = useSelector(selectAllDatabaseInvoices())
+    const dbInvoices = useSelector(selectAllDatabaseInvoices)
 
     const handleClick = (e) => {
         console.log(e.target.value)
@@ -27,7 +27,7 @@ function DisplayDbInvoices() {
                     {dbInvoices.map((invoice, idx) => {
                         return (
                             <tr key={idx} id={invoice.Invoice_ID}>
-                                <td>{invoice.Invoice_ID}</td>
+                                <td><a href={`/InvoiceViewer/${invoice.Vendor}/${invoice.Invoice_ID}`}>{invoice.Invoice_ID}</a></td>
                                 <td>{invoice.Vendor}</td>
                                 <td>{format(new Date(invoice.Invoice_Date), 'MM/dd/yyyy')}</td>
                                 <td>{invoice.Invoice_Total}</td>

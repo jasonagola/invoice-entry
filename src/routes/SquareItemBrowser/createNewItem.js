@@ -17,12 +17,12 @@ function ItemCreator() {
   }
 
   const addVariation = () => {
-    let newfield = {
+    let newField = {
       itemVariationName:'',
       itemVariationPrice:'',
       itemVariationSKU: ''
     }
-    setVariationFields([...variationFields, newfield])
+    setVariationFields([...variationFields, newField])
   }
 
   const submit = (e) => {
@@ -41,8 +41,8 @@ function ItemCreator() {
   return (
     <div>
         <form onSubmit={submit}>
-          <label htmlFor="itemName">Item Name:</label>
-          <input type="text" id="itemName" name="itemName" value= "NewItem"/>
+          {/* <label htmlFor="itemName">Item Name:</label> */}
+          <input type="text" id="itemName" name="itemName" placeholder='Item Name'/>
 
           {/* <label for="itemAbbreviation">Item Abbreviation:</label>
           <input type="text" id="itemAbbreviation" name="itemAbbreviation" value="ITM"/> */}
@@ -53,36 +53,33 @@ function ItemCreator() {
           {variationFields.map((input, index) => {
             return (
               <div key={index}>
-                <label htmlFor="itemVariationName">Item Variation Name:</label>
+                {/* <label htmlFor="itemVariationName">Item Variation Name:</label> */}
                 <input 
                   type="text" 
                   id="itemVariationName" 
                   name="itemVariationName" 
-                  value="Item Variation"
                   placeholder='Item Variation Name'
                   onChange={event => handleFormChange(index, event)}
                 />
 
-                <label htmlFor="itemVariationPrice">Item Variation Price:</label>
+                {/* <label htmlFor="itemVariationPrice">Item Variation Price:</label> */}
                 <input 
                   type="number" 
                   id="itemVariationPrice" 
                   name="itemVariationPrice" 
-                  value="9999"
                   placeholder='Price'
                   onChange={event => handleFormChange(index, event)}
                 />
 
-                <label htmlFor="itemVariationSKU">Item Variation SKU:</label>
+                {/* <label htmlFor="itemVariationSKU">Item Variation SKU:</label> */}
                 <input 
                   type="text" 
                   id="itemVariationSKU" 
                   name="itemVariationSKU" 
-                  value="MA2222"
                   placeholder='SKU'
                   onChange={event => handleFormChange(index, event)}
                 />
-                <button onClick={() => removeVariation(index)}>Remove</button>
+                <button className='delete' onClick={() => removeVariation(index)}>Remove</button>
 
               </div>
             )
@@ -90,7 +87,7 @@ function ItemCreator() {
           )}
           
 
-          <button onClick={submit}>Submit</button>
+          <button onClick={submit}>Item Looks Good!</button>
         </form>
     </div>
   )

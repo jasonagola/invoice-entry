@@ -48,7 +48,7 @@ export const selectAllDatabaseInvoices = (state) => {
 
 /////Thunks
 export const fetchInvoices = createAsyncThunk('/loadDatabaseInvoices', async () => {
-    console.log('State fetching database invoices')
+    // console.log('State fetching database invoices')
     const response = await getAllDatabaseInvoices()
     return response.data
     

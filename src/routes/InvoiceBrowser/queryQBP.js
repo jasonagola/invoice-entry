@@ -1,8 +1,8 @@
 import React from 'react';
-import { invoiceCheckQbp } from './store/foundInvoices/foundInvoicesSlice';
-import store from './store/store';
+import { invoiceCheckQbp } from '../../store/foundInvoices/foundInvoicesSlice';
+import store from '../../store/store';
 import { format } from 'date-fns'
-import {getQbpInvoices} from './utils/apiCalls'
+import {getQbpInvoices} from '../../utils/apiCalls'
 
 function QueryQBP() {
 

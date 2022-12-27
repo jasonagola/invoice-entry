@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import App from './routes/App'
 import InvoiceBrowser from './routes//InvoiceBrowser/InvoiceBrowser'
-import InvoiceViewer from './routes/InvoiceViewer/InvoiceViewer';
+import InvoiceViewer, {invoiceLoader} from './routes/InvoiceViewer/InvoiceViewer';
 import SquareItemBrowser from './routes/SquareItemBrowser/SquareItemBrowser';
 import reportWebVitals from './reportWebVitals';
 import Dashboard from './routes/Dashboard';
@@ -25,8 +25,13 @@ const router = createBrowserRouter([
         element: <InvoiceBrowser/>
       },
       {
-        path: '/InvoiceViewer',
-        element: <InvoiceViewer/>
+        path: '/InvoiceViewer/',
+        element: <InvoiceViewer/>,
+      },
+      {
+        path: '/InvoiceViewer/:vendor/:invoiceNumber',
+        element: <InvoiceViewer/>,
+        loader: invoiceLoader,
       },
       {
         path: '/SquareItemBrowser',
