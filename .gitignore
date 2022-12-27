@@ -6,6 +6,7 @@
 .pnp.js
 .env
 .backend.js
+/RETIRED_FILES
 
 # testing
 /coverage
