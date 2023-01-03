@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer')
 const express = require('express')
 const cors = require('cors')
 PORT = 8100;
+require('dotenv').config()
 
 const app = express();
 app.use(cors({
@@ -16,8 +17,8 @@ app.get('/screenshot', async (req, res) => {
         const page = await browser.newPage();
         await page.goto('https://www.qbp.com/qbponlinestorefront/login')
         await page.waitForSelector('#username')
-        await page.type('#username', 'LocalBikeShop')
-        await page.type('#password', 'PizzaParty69!')
+        await page.type('#username', process.env.QBP_USERNAME)
+        await page.type('#password', process.env.QBP_PASSWORD)
         await page.click('.btn.btn-primary.form-control')
         await page.goto(url)
     } catch(error) {
@@ -35,8 +36,8 @@ app.get('/authorizeQBP', async (req, res) => {
         const page = await browser.newPage();
         await page.goto('https://www.qbp.com/qbponlinestorefront/login')
         await page.waitForSelector('#username')
-        await page.type('#username', 'LocalBikeShop')
-        await page.type('#password', 'PizzaParty69!')
+        await page.type('#username', process.env.QBP_USERNAME)
+        await page.type('#password', process.env.QBP_PASSWORD)
         await page.click('.btn.btn-primary.form-control')
         await page.waitForSelector('#sectionNav')
         await page.goto(invoiceURL)
@@ -58,8 +59,8 @@ app.get('/getPrices', async (req, res) => {
         const page = await browser.newPage();
         await page.goto('https://www.qbp.com/qbponlinestorefront/login')
         await page.waitForSelector('#username')
-        await page.type('#username', 'LocalBikeShop')
-        await page.type('#password', 'PizzaParty69!')
+        await page.type('#username', process.env.QBP_USERNAME)
+        await page.type('#password', process.env.QBP_PASSWORD)
         await page.click('.btn.btn-primary.form-control')
         await page.waitForSelector('#sectionNav')
         await page.goto('https://www.qbp.com/qbponlinestorefront' + url)
@@ -71,42 +72,4 @@ app.get('/getPrices', async (req, res) => {
 
     }
 })
-
-// app.get('/getPrices', async (req, res) => {
-//     console.log('getPrices baby')
-//     const invoice = req.query.invoice
-//     console.log(invoice)
-
-//     async function urlLoad(page, itemUrl) {
-//         await page.goto(itemUrl)
-//         console.log('We went there')
-//     }
-
-//     try { 
-//         const browser = await puppeteer.launch({headless: false});
-//         const page = await browser.newPage();
-//         await page.goto('https://www.qbp.com/qbponlinestorefront/login')
-//         await page.waitForSelector('#username')
-//         await page.type('#username', 'LocalBikeShop')
-//         await page.type('#password', 'PizzaParty69!')
-//         await page.click('.btn.btn-primary.form-control')
-//         await page.waitForSelector('#sectionNav')
-//         console.log('We made it here')
-//         const itemMSRPs = {}
-//         console.log('And also here')
-//         Object.values(invoice).forEach(async (item) => {
-//             const url = item.url
-//             const itemUrl = `https://www.qbp.com/qbponlinestorefront${url}`
-//             const itemMSRP = await page.evaluate(() => document.querySelector('#productPricing .colx-xs-5 .col-md-6 .text-right')).textContent
-//             console.log('looping away')
-//             itemMSRPs[item.id] = itemMSRP  
-//         })
-//         await browser.close()
-//         console.log(itemMSRPs)
-//         res.send(itemMSRPs)
-//     } catch(error) {
-//         console.log(error)
-//         res.send(error)
-//     }
-// })
 
