@@ -1,6 +1,6 @@
 ## About 
 
-**Currently being tested and devloped against traditional workflow
+**Currently being tested and devloped against traditional workflow.  Backend Tools will be integrated into /bike-backend which is already up and running on a VPS. 
 
 This application was built to parse web Invoices from Quality Bicycle Parts (QBP). 
 
