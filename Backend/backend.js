@@ -10,9 +10,7 @@ require('dotenv').config()
 const PORT = 8000
 const app = express();
 
-app.use(cors({
-    origin: 'http://localhost:3000'
-}))
+app.use(cors())
 
 
 const { Client, Envirnment, Environment } = require('square');
@@ -216,20 +214,4 @@ app.get('/QBP/invoices/number', async (req, res) => {
         }
 })
 
-
-////Put Need to Create Form with dynamic entry for multiple variations
-// app.put('/createCatalogObject', async (req, res) => {
-//     try {
-//         const response = await client.catalopApi.upsertCatalogObject({
-//             idempotencyKey: '///////////',
-//             object: {
-//                 type: 'ITEM',
-//                 id: '#New_Item',
-//                 itemData: {
-
-//                 }
-//             }
-//         })
-//     }
-// })
 
