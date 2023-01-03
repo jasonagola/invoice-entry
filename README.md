@@ -1,18 +1,13 @@
-## About 
 
-**Currently being tested and devloped against traditional workflow
+**Currently being tested and developed against traditional workflow.  Backend Tools will be integrated into /bike-backend which is already up and running on a VPS.**
 
-This application was built to parse web Invoices from Quality Bicycle Parts (QBP). 
+## The Problem
+  The bike shop deals with 10-15 different distributors on a regular basis thourghout a normal year.  Normal workflow includes the manual collection of invoices and processing the relevent data for use in our Point of Sale (up to date MSRPs, inventory tracking, unit cost, and cost of goods sold information).  This process is not only is it important in direct sales but it is also extremely important for purposes of business accounting.  The team we have is small and its hard to keep up with a never ending stream of what is otherwise a fairly reptitive and time consuming task.  There is no standardized format, information, or availabilty of these invoices.  
 
-Puppeteer scrapes invoice data, item info, and pricing with a provided invoice url and authentication. The application then matches already existing inventory items to a Square Inventory Library and can provide a quick way to add items along with variations directly to the library without having to manually enter all information. 
+## About
+  This application is built as an internal tool to process invoices from any number of distributors.  Currently the project is able to process invoices from Quality Bicycle Parts (QBP) with plans to integrate other scraping and API collection for other distributors
 
-Square's Catalog API is pretty limited compared to its in browser functionality.  All item codes on QBP's website are included in the Item Library as SKUs instead of Vendor Codes (lacking in Square's API) to enable lookup. Also missing are unit cost features and Purchase order creation for batch inventory ingress. 
-
-
-This application is built as an internal tool to process invoices from any number of distributors.  
-
-<strong>The Problem</strong></br>
-The Bike Shop deals with 10-15 different distributors on a regular basis thourghout a normal year.  The process of manually collecting invoices and processing the relevent data for use in our Point of Sale (up to date MSRPs, inventory tracking, unit cost, and cost of goods sold information).  Not only is it important in direct sales but it is also extremely important for purposes of business accounting.  The team we have is small and its hard to keep up with a never ending stream of what is otherwise a fairly reptitive and time consuming task.  There is no standardized format, information, or availabilty of these invoices.  
+  Where applicable, APIs or Puppeteer collects invoice data, item info, and pricing.   The application then matches already existing inventory items to a Square's Inventory Library and can provide a quick way to add items along with variations directly to the library without having to manually collect and enter all information. 
 
 ## Technologies
 * React
@@ -35,4 +30,8 @@ The Bike Shop deals with 10-15 different distributors on a regular basis thourgh
     - [ ] CSV Output for direct upload in the browser
     - [ ] Shipping Cost by Vendor
  - [ ] Express Routing and integration into deployed backend (bike-backend)
+ - [ ] 
+
+## Notable Libraries
+* Puppeteer 
  
