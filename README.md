@@ -15,3 +15,21 @@ The Bike Shop deals with 10-15 different distributors on a regular basis thourgh
 
 <h2>The Execution</h2>
     What Tech and what structure and workflow
+    
+## Technologies
+
+## Roadmap
+- [ ] Distributor Support
+    - [ ] JBI
+    - [ ] Velo Orange
+    - [ ] Merry Sales
+    - [ ] Amazon Business Prime
+    - [ ] Highway Two
+    - [ ] Simworks
+    - [ ] 
+ - [ ] More advanced Item Creation Screen with support for data manipulation available in the Square API
+ - [ ] Library MSRP check and update
+ - [ ] Purchase Order Integration
+    - [ ] CSV Output for direct upload in the browser
+    - [ ] Shipping Cost by Vendor
+ 
