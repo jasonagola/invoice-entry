@@ -7,7 +7,7 @@
 ## About
   This application is built as an internal tool to process invoices from any number of distributors.  Currently the project is able to process invoices from Quality Bicycle Parts (QBP) with plans to integrate other scraping and API collection for other distributors
 
-  Where applicable, APIs or Puppeteer collects invoice data, item info, and pricing.   The application then matches already existing inventory items to a Square's Inventory Library and can provide a quick way to add items along with variations directly to the library without having to manually collecdt and enter all information. 
+  Where applicable, APIs or Puppeteer collects invoice data, item info, and pricing.   The application then matches already existing inventory items to a Square's Inventory Library and can provide a quick way to add items along with variations directly to the library without having to manually collect and enter all information. 
 
 ## Technologies
 * React
