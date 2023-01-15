@@ -7,11 +7,22 @@
     border: 2px solid black;
 }
 
+
+button {
+  background-color: #111827;
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  margin: .5rem;
+  color: #FFFFFF;
+  padding: .75rem 1.2rem;
+  text-align: center;
+}
+
 .itemDeleteButton {
   display: grid;
   grid-column: 2 / 4;
   grid-row: 4 / 4;
-  background-color: #111827;
+  background-color: rgba(175, 55, 55, 0.9);
   border: 1px solid transparent;
   border-radius: .75rem;
   margin: .5rem;

@@ -1,50 +1,61 @@
-.itemContainer {
-    /* grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 30 1fr 1fr; */
-}
-
-input {
+.itemContainer input {
   border: none;
   border-bottom: 1px solid white;
   background: transparent;
+  /* background-color: rgba(155, 150, 178, 0.2); */
   color: white;
   margin: .5rem;
 }
 
 .itemName {
   align-self: center;
-  width: 98%
+  width: 98%;
+  font-size: 2rem;
 }
 
 .variationContainer {
-  grid-template-columns: 1fr 1fr 1fr 4fr;
-  grid-template-rows: repeat(4fr);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 10%;
+  grid-template-rows: repeat(4fr) 10%;
+  margin: 2rem;
+  border: 1px solid white;
+  border-radius: 1rem;
 }
 
 .itemVariationName {
   display:grid;
-  grid-row: 2/ 3;
+  grid-row: 1/ 2;
+  grid-column: 1/3;
+  font-size: 1.2rem;
+  width: 50%;
 }
 
-/* .variationContainer label {
-  display: grid;
-  grid-column: 1/2;
+.itemVariationName label {
+  justify-self: left;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 
-.variationContainer input {
+.itemDetails {
   display: grid;
-  grid-column: 2/3;
-} */
+  grid-row: 2/4;
+  grid-column: 1 /5;
+}
+
 
 .deleteVariationButton {
   display: grid;
-  grid-column: 3/4;
+  grid-column: 5;
+  background-color: rgba(175, 55, 55, 0.9);
 }
 
 
 
 /* .itemVariationButton {
 } */
+.verifyItemButton {
+  background-color: rgba(55, 175, 55, 0.9);
+}
 
 .addItemButton {
   background-color: #111827;
