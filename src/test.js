@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchInvoices, selectAllDatabaseInvoices } from './features/databaseInvoices/databaseInvoicesSlice';
-import store from './features/store';
+import { getItemMsrp } from './utils/apiCalls';
 
 function TestBehavior() {
-    const runTest = () => {
+    const runTest = async () => {
+        const response = await getItemMsrp('QBP', 'MA2066')
+        console.log(response)
         
     }
 

@@ -214,4 +214,21 @@ app.get('/QBP/invoices/number', async (req, res) => {
         }
 })
 
-
+app.get('/QBP/itemMsrp', async (req, res) => {
+    const sku = req.query.sku
+    
+    try {
+        const options = {
+            method: "GET", 
+            url: baseUrlQBP + `/product/sku/${sku}`,
+            headers: {'X-QBPAPI-KEY': process.env.QBP_ACCESS_TOKEN}
+        }
+        const response = await axios.request(options)
+        const responseString = JSONBig.stringify(response.data)
+        console.log(responseString)
+        res.send(responseString)
+    } catch(error) {
+        console.log(error)
+        res.send(error)
+    }
+})
