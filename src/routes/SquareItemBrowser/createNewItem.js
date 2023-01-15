@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import uuid from 'react-uuid';
+import './createNewItem.css'
 
-function ItemCreator() {
+function ItemCreator(props) {
+  const item = props.item
+  const [itemDescription, setItemDescription] = useState(props.item.description)
+
   const [variationFields, setVariationFields] = useState([
     {
       itemVariationName:'',
@@ -12,6 +16,7 @@ function ItemCreator() {
 
   const handleFormChange = (index, event) => {
     let data = [...variationFields];
+    console.log(data)
     data[index][event.target.name] = event.target.value;
     setVariationFields(data)
   }
@@ -36,19 +41,26 @@ function ItemCreator() {
     setVariationFields(data)
   }
 
+  const handleDescriptionChange = (e) => {
+    setItemDescription(e.target.value)
+  }
+
 ////Item Variation Price needs to be fetched from QBP or by direct link
 
   return (
-    <div>
+    <div id={`${item.sku}-item`} className="itemContainer">
         <form onSubmit={submit}>
           {/* <label htmlFor="itemName">Item Name:</label> */}
-          <input type="text" id="itemName" name="itemName" placeholder='Item Name'/>
-
-          {/* <label for="itemAbbreviation">Item Abbreviation:</label>
-          <input type="text" id="itemAbbreviation" name="itemAbbreviation" value="ITM"/> */}
-          
-          {/* Category? */}
-          <button onClick={addVariation}>Add Variation</button>
+          <input 
+            type="text" 
+            className="itemName" 
+            name="itemName" 
+            value={item.description} 
+            placeholder='Item Name'
+            onChange={handleDescriptionChange}
+            />
+            
+          <button className='itemVariationButton' onClick={addVariation}>Add Variation</button>
 
           {variationFields.map((input, index) => {
             return (
@@ -56,30 +68,33 @@ function ItemCreator() {
                 {/* <label htmlFor="itemVariationName">Item Variation Name:</label> */}
                 <input 
                   type="text" 
-                  id="itemVariationName" 
+                  className="itemVariationName" 
                   name="itemVariationName" 
                   placeholder='Item Variation Name'
+                  value={item.description}
                   onChange={event => handleFormChange(index, event)}
                 />
 
                 {/* <label htmlFor="itemVariationPrice">Item Variation Price:</label> */}
                 <input 
                   type="number" 
-                  id="itemVariationPrice" 
+                  className="itemVariationPrice" 
                   name="itemVariationPrice" 
                   placeholder='Price'
+                  value={item.msrp}
                   onChange={event => handleFormChange(index, event)}
                 />
 
                 {/* <label htmlFor="itemVariationSKU">Item Variation SKU:</label> */}
                 <input 
                   type="text" 
-                  id="itemVariationSKU" 
+                  className="itemVariationSKU" 
                   name="itemVariationSKU" 
                   placeholder='SKU'
+                  value={item.sku}
                   onChange={event => handleFormChange(index, event)}
                 />
-                <button className='delete' onClick={() => removeVariation(index)}>Remove</button>
+                <button className='deleteVariationButton' onClick={() => removeVariation(index)}>Remove Variation</button>
 
               </div>
             )

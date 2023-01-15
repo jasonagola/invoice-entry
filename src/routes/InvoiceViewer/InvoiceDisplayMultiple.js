@@ -1,28 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLoadedInvoice, loadInvoiceFromVendor } from '../../store/loadedInvoice/loadedInvoiceSlice';
-import ItemMatch from '../SquareItemBrowser/squareItemMatch';
+import { getLoadedInvoice, getLoadedInvoiceStatus, getLoadedInvoiceVendor } from '../../store/loadedInvoice/loadedInvoiceSlice';
+import MSRP from './MSRP';
+import ItemMatch from './squareItemMatch';
 
 function InvoiceDisplayMultiple(props) {
-    const [invoiceRequest, setInvoiceRequest] = useState()
+    const invoiceRequest = props.invoiceRequest
     const dispatch = useDispatch()
-    
-    useEffect(() => { 
-        // console.log(props.invoiceRequest) 
-        setInvoiceRequest(props.invoiceRequest)     
-    },[])
 
-    useEffect(() => {
-        if (invoiceRequest != undefined) {
-            dispatch(loadInvoiceFromVendor(invoiceRequest))
-        }
-    }, [invoiceRequest])
-
+    const invoiceStatus = useSelector(getLoadedInvoiceStatus)
     const invoiceData = useSelector(getLoadedInvoice)
-    const loadedInvoiceStatus = props.loadedInvoiceStatus
-    console.log(loadedInvoiceStatus)
+    const invoiceVendor = useSelector(getLoadedInvoiceVendor)
+    console.log(invoiceVendor)
 
-    if (invoiceData != undefined) {
+
+    if (invoiceData !== undefined) {
 
         return(
             <div id='loadedInvoice'>
@@ -49,7 +41,7 @@ function InvoiceDisplayMultiple(props) {
                                     <td>${item.unitCost}</td>
                                     <td>${item.quantity * item.unitCost}</td>
                                     <td>{<ItemMatch search={item.sku}/>}</td>
-                                    <td>MSRP</td>
+                                    <td>{<MSRP itemSku={item.sku} vendor={invoiceVendor}/>}</td>
                                     
                                 </tr>
                             )

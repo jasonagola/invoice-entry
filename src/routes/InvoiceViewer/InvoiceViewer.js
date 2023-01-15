@@ -1,28 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useLoaderData } from 'react-router-dom'
-import { getInvoiceFromVendor } from '../../utils/apiCalls'
 import InvoiceManualLoader from './InvoiceManualLoader'
 import InvoiceDisplayMultiple from './InvoiceDisplayMultiple'
-import store from '../../store/store'
-import { useSelector } from 'react-redux'
-import { getLoadedInvoiceStatus } from '../../store/loadedInvoice/loadedInvoiceSlice'
+import { loadInvoiceFromVendor } from '../../store/loadedInvoice/loadedInvoiceSlice'
+import TestBehavior from '../../test'
+
 
 export async function invoiceLoader ({params}) {
     return params
 }
 
-
-
 function InvoiceViewer() {
     const invoiceRequest = useLoaderData()
-    const loadedInvoiceStatus = useSelector(getLoadedInvoiceStatus)
-    // console.log(invoiceRequest)
+    const dispatch = useDispatch()
+
+    if (invoiceRequest !== undefined) {
+        dispatch(loadInvoiceFromVendor(invoiceRequest))
+    }
 
     return(
         <div>
             <h2>Invoice Viewer</h2>
             <InvoiceManualLoader/>
-            <InvoiceDisplayMultiple loadedInvoiceStatus={loadedInvoiceStatus} invoiceRequest={invoiceRequest}/>
+            <InvoiceDisplayMultiple/>
         </div>
     )
 }

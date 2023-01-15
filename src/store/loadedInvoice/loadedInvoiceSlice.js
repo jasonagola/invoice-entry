@@ -2,13 +2,24 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import { getInvoiceFromVendor } from '../../utils/apiCalls'
 import { qbpInvoiceXMLtoJSON } from '../../utils/qbpInvoiceHelpers'
 
+
+/////Mock Invoice Item Template
+// sku = {
+//     sku: sku, 
+//     description: description,
+//     quantity: quantity,
+//     unitCost: unitCost,
+//     msrp: msrp,
+//     inSquare: inSquare,
+// }
+
 const options = {
     name: 'loadedInvoice', 
     initialState: {
         status: 'idle',
-        squareMatch: 'awaiting',
         vendor: '',
-        invoice: []
+        invoiceNumber: '',
+        invoice: {}
     },
 
 
@@ -17,16 +28,18 @@ const options = {
             const invoice = action.payload
             return {invoice}
         },
-        updateSquareMatch: (state, action) => {
-            const squareMatch = action.payload
-            return {...state, squareMatch:squareMatch}
+        updateInSquare: (state, action) => {
+            console.log('Attempting to update Square Status')
+            const updatedItem = {...state.invoice[action.payload.itemID], inSquare: action.payload.inSquare}
+            return {...state, invoice: {
+                    ...state.invoice, [action.payload.itemID]: updatedItem}}
         },
-        updateSquareStatus: (state, action) => {
-            console.log(action.itemID)
-            console.log(action.payload.itemID)
-            // const updatedItem = {...state.invoice[action.payload.itemID], inSquare: action.payload.inSquare}
-            // return {...state, invoice: {
-            //         ...state.invoice, [action.payload.itemID]: updatedItem}}
+        updateItemMSRP: (state, action) => {
+            console.log('Updating Item MSRP')
+            const updatedItem = {...state.invoice[action.payload.itemID], MSRP: action.payload.MSRP}
+            return {...state, invoice: {
+                ...state.invoice, [action.payload.itemID] : updatedItem
+            }}
         }
 
     },
@@ -37,15 +50,14 @@ const options = {
           })
           .addCase(loadInvoiceFromVendor.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            const {vendor, invoice} = action.payload
-            console.log(action.payload)
-        
+            const {vendor, invoice, invoiceNumber} = action.payload
             state.vendor = vendor
             state.invoice = invoice
+            state.invoiceNumber = invoiceNumber
           })
           .addCase(loadInvoiceFromVendor.rejected, (state, action) => {
-            state.qbp.status = 'failed'
-            state.qbp.error = action.error.message
+            state.status = 'failed'
+            state.error = action.error.message
           })
     }
 }
@@ -54,37 +66,47 @@ const options = {
 export const loadedInvoiceSlice = createSlice(options)
 
 
-export const {loadInvoice, updateSquareStatus} = loadedInvoiceSlice.actions
+export const {loadInvoice, updateInSquare, updateItemMSRP} = loadedInvoiceSlice.actions
 
 export default loadedInvoiceSlice.reducer
 
 
 /////Selectors
+export const getLoadedInvoiceVendor = (state) => {
+    return state.loadedInvoice?.vendor
+}
+
 export const getLoadedInvoice = (state) => {
-    return state.loadedInvoice.invoice
+    return state.loadedInvoice?.invoice
 }
 
 export const getLoadedInvoiceStatus = (state) => {
-    return state.loadedInvoice.status
+    return state.loadedInvoice?.status
 } 
 
 export const getSquareMatchStatus = (state) => {
-    return state.loadedInvoice.squareMatch
+    return state.squareMatch
 }
 
+
+////getInSquare 
+/////getItemMSRP
+
 /////Thunks
-/////design backend path such that /Vendor/loadInvoice and pass parameter as number
 export const loadInvoiceFromVendor = createAsyncThunk('/loadInvoiceFromVendor', async (invoiceRequest) => {
     const {vendor, invoiceNumber} = invoiceRequest
-    console.log(vendor)
-    const response = await getInvoiceFromVendor(vendor, invoiceNumber)
-    switch (vendor) {
-        case 'QBP':
-            const invoice = qbpInvoiceXMLtoJSON(response)
-            const invoiceInfo = {vendor, invoice}
-            // console.log(invoiceInfo)
-            return invoiceInfo
+    // const currentInvoiceNumber = getState().loadedInvoice.invoiceNumber
+    // console.log(currentInvoiceNumber)
+        const response = await getInvoiceFromVendor(vendor, invoiceNumber)
+        switch (vendor) {
+            case 'QBP':
+                const invoice = qbpInvoiceXMLtoJSON(response)
+                console.log(invoice)
+                const invoiceInfo = {vendor, invoice, invoiceNumber}
+                return invoiceInfo
             break;
-    }
+            default:
+                console.log('No matching route for invoice')
+        }
     ////Will need to standardize response   
 })

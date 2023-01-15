@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { useSelector } from 'react-redux';
+import { getLoadedInvoice } from '../../store/loadedInvoice/loadedInvoiceSlice';
 import ItemCreator from './createNewItem';
 import './ItemCreatorDisplay.css'
 
 function ItemCreatorDisplay(props) {
-    const newItems = props.newItems
+    const items = Object.values(useSelector(getLoadedInvoice))
+    console.log(items)
+    
+    useEffect(() => {  
+        setItemFields(items)
+    }, [])
 
     const [itemFields, setItemFields] = useState([])
 
-   
 
     const handleFormChange = (index, event) => {
         let data = [...itemFields];
@@ -37,15 +43,16 @@ function ItemCreatorDisplay(props) {
 
     return (
         <div>
-                <button onClick={addItem}>Add Item</button>
+                
                 {itemFields.map((input, index) => {
                     return (
                         <div key={index} className='itemBox'>
-                            <ItemCreator/>
+                            <ItemCreator item={input}/>
                             <button onClick={() => removeItem(index)}>Delete Item</button>
                         </div>
                     )
-                })}  
+                })}
+                <button className="addItemButton" onClick={addItem}>Add Item</button>  
         </div>
     )
 }

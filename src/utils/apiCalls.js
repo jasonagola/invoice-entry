@@ -1,5 +1,6 @@
 ////Square APIs
 import axios from 'axios';
+import { qbpMsrpFromXML } from './qbpInvoiceHelpers';
 
 const devServer = 'http://localhost:8000'
 
@@ -230,6 +231,24 @@ export async function getQbpInvoiceByNumber(invoiceNumber) {
         }
         const response = await axios.request(options)
         return response.data
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+///Get MSRP from Vendor, passing through vendor and sku
+export async function getItemMsrp(vendor, sku) {
+    try {
+        const options = {
+            method: 'GET', 
+            url: devServer + `/${vendor}/itemMsrp`,
+            params: {
+                sku: sku
+            }
+        }
+        const response = await axios.request(options)
+
+        return qbpMsrpFromXML(response.data)  
     } catch(error) {
         console.log(error)
     }

@@ -24,26 +24,29 @@ export async function getDefaultQbpInvoices(endDate = lastThirtyDaysDate, startD
 
 
 export function qbpInvoiceXMLtoJSON(xmlResponse) {
-    console.log('trying to parse XML with new function')
     var xmlDoc = $.parseXML(xmlResponse)
     var $xml = $(xmlDoc)
     const items = $xml.find("line")
-    var invoiceItems = []
+    var invoiceItems = {}
     for (let i = 0; i<items.length; i++) {
         const newItem = {};
-        newItem["sku"] = $(items[i]).find('sku').text()
+        const itemSku = $(items[i]).find('sku').text()
+        newItem["sku"] = itemSku
         newItem["description"] = $(items[i]).find('description').text()
         newItem["quantity"] = $(items[i]).find('quantityShipped').text()
         newItem["unitCost"] = $(items[i]).find('price').text()
-        invoiceItems.push(newItem)
+        newItem['msrp'] = ''
+        newItem["inSquare"] = false
+        invoiceItems[itemSku] = newItem
     }
     return invoiceItems
    
-//     const itemSku = []
-//     $items.each(() => {
-//         const sku = $(this).
-//         itemSku.push(sku)
-//     })
-//     console.log(itemSku)
-    
+}
+
+export function qbpMsrpFromXML(xmlResponse) {
+    var xmlDoc = $.parseXML(xmlResponse)
+    var $xml = $(xmlDoc)
+    const itemMsrp = $xml.find("msrp").find("value").text()
+    console.log(itemMsrp)
+    return itemMsrp
 }
