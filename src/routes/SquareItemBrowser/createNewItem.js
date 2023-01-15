@@ -45,11 +45,9 @@ function ItemCreator(props) {
     setItemDescription(e.target.value)
   }
 
-////Item Variation Price needs to be fetched from QBP or by direct link
-
   return (
-    <div id={`${item.sku}-item`} className="itemContainer">
-        <form onSubmit={submit}>
+    <div id={`${item.sku}-item`}>
+        <form className="itemContainer" onSubmit={submit}>
           {/* <label htmlFor="itemName">Item Name:</label> */}
           <input 
             type="text" 
@@ -60,32 +58,32 @@ function ItemCreator(props) {
             onChange={handleDescriptionChange}
             />
             
-          <button className='itemVariationButton' onClick={addVariation}>Add Variation</button>
+          
 
           {variationFields.map((input, index) => {
             return (
-              <div key={index}>
-                {/* <label htmlFor="itemVariationName">Item Variation Name:</label> */}
+              <div key={index} className="variationContainer">
+                <label htmlFor="itemVariationName">Item Variation Name:</label>
                 <input 
                   type="text" 
                   className="itemVariationName" 
                   name="itemVariationName" 
                   placeholder='Item Variation Name'
-                  value={item.description}
+                  defaultValue={item.description}
                   onChange={event => handleFormChange(index, event)}
                 />
 
-                {/* <label htmlFor="itemVariationPrice">Item Variation Price:</label> */}
+                <label htmlFor="itemVariationPrice">Item Variation Price:</label>
                 <input 
                   type="number" 
                   className="itemVariationPrice" 
                   name="itemVariationPrice" 
                   placeholder='Price'
-                  value={item.msrp}
+                  defaultValue={item.msrp}
                   onChange={event => handleFormChange(index, event)}
                 />
 
-                {/* <label htmlFor="itemVariationSKU">Item Variation SKU:</label> */}
+                <label htmlFor="itemVariationSKU">Item Variation SKU:</label>
                 <input 
                   type="text" 
                   className="itemVariationSKU" 
@@ -94,15 +92,24 @@ function ItemCreator(props) {
                   value={item.sku}
                   onChange={event => handleFormChange(index, event)}
                 />
-                <button className='deleteVariationButton' onClick={() => removeVariation(index)}>Remove Variation</button>
+
+                <button 
+                  className='deleteVariationButton' 
+                  onClick={() => removeVariation(index)}
+                >
+                  Remove Variation
+                </button>
 
               </div>
+              
             )
           }
           )}
-          
+          <button className='addVariationButton' onClick={addVariation}>Add Variation</button>
 
-          <button onClick={submit}>Item Looks Good!</button>
+          <button 
+            className='verifyItemButton'
+            onClick={submit}>Item Looks Good!</button>
         </form>
     </div>
   )

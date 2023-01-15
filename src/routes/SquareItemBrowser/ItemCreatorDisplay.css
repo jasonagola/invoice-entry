@@ -1,15 +1,33 @@
-.itemBox {
-    border: 2px solid black
+.itemCreatorDisplay {
+  background-color: rgba(17, 24, 39, 0.9);
+  color: white;
 }
 
-/* .delete{
-    display: inline-block;
-       width: 19px;
-      height: 18px;
-      text-align: center;
-    background-color: #D2D2D2;
-      border-radius: 50%;
-    font-size: 12px;
-    line-height: 18px;
-    cursor: pointer;
-      } */
+.itemBox {
+    border: 2px solid black;
+}
+
+.itemDeleteButton {
+  display: grid;
+  grid-column: 2 / 4;
+  grid-row: 4 / 4;
+  background-color: #111827;
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  margin: .5rem;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  padding: .75rem 1.2rem;
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  touch-action: manipulation;
+  width: auto;
+}

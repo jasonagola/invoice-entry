@@ -42,13 +42,16 @@ function ItemCreatorDisplay(props) {
     }
 
     return (
-        <div>
+        <div className="itemCreatorDisplay">
                 
                 {itemFields.map((input, index) => {
                     return (
                         <div key={index} className='itemBox'>
                             <ItemCreator item={input}/>
-                            <button onClick={() => removeItem(index)}>Delete Item</button>
+                            <button 
+                                className="itemDeleteButton"
+                                onClick={() => removeItem(index)}>Delete Item
+                            </button>
                         </div>
                     )
                 })}
