@@ -18,19 +18,35 @@
 
 ## Roadmap
 - [ ] Distributor Support
+    - [x] QBP
+      - [x] MSRP endpoint
     - [ ] JBI
     - [ ] Velo Orange
     - [ ] Merry Sales
     - [ ] Amazon Business Prime
     - [ ] Highway Two
     - [ ] Simworks
+
+ - [ ] MSRP component
+    - [x] QBP endpoint integrated
+    - [ ] Load in Library and current listed MSRP comparison 
+    - [ ] Prompt differences or if No MSRP found 
+
  - [ ] More advanced Item Creation Screen with support for data manipulation available in the Square API
+    - [ ] Square Upsert Object Creation
+    - [ ] For Objects Found in library, load data into edit form for possible updates(MSRP checker, variations, etc)
  - [ ] Library MSRP check and update
  - [ ] Purchase Order Integration
     - [ ] CSV Output for direct upload in the browser
     - [ ] Shipping Cost by Vendor
  - [ ] Express Routing and integration into deployed backend (bike-backend)
- - [ ] 
+
+
+ ## Recently completed from Roadmap
+ - QBP Distributor Support Complete with MSRP endpoint integration
+ - MSRP component for retrieving and displaying current price from loadedInvoice data
+
+
 
 ## Notable Libraries
 * Puppeteer 

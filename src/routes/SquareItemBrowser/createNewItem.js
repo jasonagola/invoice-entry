@@ -111,10 +111,6 @@ function ItemCreator(props) {
           }
           )}
           <button className='addVariationButton' onClick={addVariation}>Add Variation</button>
-
-          <button 
-            className='verifyItemButton'
-            onClick={submit}>Item Looks Good!</button>
         </form>
     </div>
   )
