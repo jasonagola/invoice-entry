@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import uuid from 'react-uuid';
 import './createNewItem.css'
 
-function ItemCreator(props) {
+function Variations(props) {
+  
   const item = props.item
-  const [itemDescription, setItemDescription] = useState(props.item.description)
+  const [itemData, setItemData] = useState(props.item)
 
   const [variationFields, setVariationFields] = useState([
     {
       itemVariationName:'',
-      itemVariationPrice:'',
-      itemVariationSKU: ''
+      itemVariationPrice:item.msrp,
+      itemVariationSKU: item.sku
     }
   ])
 
-  const handleFormChange = (index, event) => {
+  const handleVariationChange = (index, event) => {
     let data = [...variationFields];
     console.log(data)
     console.log(event.target)
@@ -31,9 +32,10 @@ function ItemCreator(props) {
     setVariationFields([...variationFields, newField])
   }
 
-  const submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(variationFields)
+    console.log(itemData)
   }
 
   const removeVariation = (index) => {
@@ -42,22 +44,21 @@ function ItemCreator(props) {
     setVariationFields(data)
   }
 
-  const handleDescriptionChange = (e) => {
-    console.log(e.target.value)
-    setItemDescription(e.target.value)
+  const handleItemChange = (e) => {
+    console.log(e.target)
   }
 
   return (
     <div id={`${item.sku}-item`}>
-        <form className="itemContainer" onSubmit={submit}>
+        <form className="itemContainer">
           {/* <label htmlFor="itemName">Item Name:</label> */}
           <input 
             type="text" 
-            className="itemName" 
+            className="itemName"
+            defaultValue={item.description}
             name="itemName" 
-            value={item.description} 
             placeholder='Item Name'
-            onChange={event => handleDescriptionChange(event)}
+            onChange={(event) => handleItemChange(event)}
             />
             
           
@@ -69,22 +70,22 @@ function ItemCreator(props) {
                   <label htmlFor="itemVariationName">Item Variation Name</label>
                   <input 
                     type="text"
+                    defaultValue={variationFields[index].description}
                     name="itemVariationName" 
                     placeholder='Item Variation Name'
-                    defaultValue={item.description}
-                    onChange={event => handleFormChange(index, event)}
+                    onChange={event => handleVariationChange(index, event)}
                   />
                 </div>
                 
                 <div className='itemDetails'>
                   <label htmlFor="itemVariationPrice">Item Variation Price:</label>
                   <input 
-                    type="number" 
+                    type="number"
+                    defaultValue={variationFields[index].msrp}
                     className="itemVariationPrice" 
                     name="itemVariationPrice" 
                     placeholder='Price'
-                    defaultValue={item.msrp}
-                    onChange={event => handleFormChange(index, event)}
+                    onChange={event => handleVariationChange(index, event)}
                   />
 
                   <label htmlFor="itemVariationSKU">Item Variation SKU:</label>
@@ -93,8 +94,7 @@ function ItemCreator(props) {
                     className="itemVariationSKU" 
                     name="itemVariationSKU" 
                     placeholder='SKU'
-                    value={item.sku}
-                    onChange={event => handleFormChange(index, event)}
+                    onChange={event => handleVariationChange(index, event)}
                   />
                 </div>
 
@@ -112,44 +112,16 @@ function ItemCreator(props) {
           )}
           <button className='addVariationButton' onClick={addVariation}>Add Variation</button>
         </form>
+        <button 
+          className='verifyItemButton'
+          onClick={handleSubmit}
+        >
+            Item Looks Good!
+        </button>
     </div>
   )
 }
 
 
-export default ItemCreator
+export default Variations
 
-
-
-// try {
-//     const response = await client.catalogApi.upsertCatalogObject({
-//       idempotencyKey: '802d34e9-3ceb-4f63-b7ae-a0633f7a50b6',
-//       object: {
-//         type: 'ITEM',
-//         id: '#New_item',
-//         itemData: {
-//           name: 'New Item',
-//           abbreviation: 'ITM',
-//           variations: [
-//             {
-//               type: 'ITEM_VARIATION',
-//               id: '#New_item_variation',
-//               itemVariationData: {
-//                 name: 'Item Variation',
-                  // sku: 'jhkjh',
-//                 pricingType: 'FIXED_PRICING',
-//                 priceMoney: {
-//                   amount: 9999,
-//                   currency: 'USD'
-//                 }
-//               }
-//             }
-//           ]
-//         }
-//       }
-//     });
-  
-//     console.log(response.result);
-//   } catch(error) {
-//     console.log(error);
-//   }
