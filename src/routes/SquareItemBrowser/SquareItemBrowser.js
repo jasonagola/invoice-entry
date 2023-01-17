@@ -1,5 +1,4 @@
 import React from 'react'
-import ItemCreator from './createNewItem'
 import ItemCreatorDisplay from './ItemCreatorDisplay'
 
 function SquareItemBrowser() {
@@ -7,7 +6,6 @@ function SquareItemBrowser() {
         <div>
             Square Item Browser
             <ItemCreatorDisplay/>
-            {/* <ItemCreator/> */}
         </div>
         
     )
