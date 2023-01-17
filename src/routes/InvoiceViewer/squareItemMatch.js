@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { searchItem } from '../../utils/apiCalls'
+import { searchItems } from '../../api/squareApiCalls'
 import { getLoadedInvoiceStatus, updateInSquare } from '../../store/loadedInvoice/loadedInvoiceSlice'
 import store from '../../store/store'
 import { useSelector } from 'react-redux'
@@ -37,7 +37,7 @@ function ItemMatch(props) {
     
 
     async function verifyMatch() {
-        const response = await searchItem(searchString)
+        const response = await searchItems(searchString)
         if (Object.values(response).length === 0) {
             return
             // return console.log('Response was empty, object does not exist.')
