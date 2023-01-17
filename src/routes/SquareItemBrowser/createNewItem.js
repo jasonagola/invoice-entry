@@ -17,6 +17,7 @@ function ItemCreator(props) {
   const handleFormChange = (index, event) => {
     let data = [...variationFields];
     console.log(data)
+    console.log(event.target)
     data[index][event.target.name] = event.target.value;
     setVariationFields(data)
   }
@@ -42,6 +43,7 @@ function ItemCreator(props) {
   }
 
   const handleDescriptionChange = (e) => {
+    console.log(e.target.value)
     setItemDescription(e.target.value)
   }
 
@@ -55,7 +57,7 @@ function ItemCreator(props) {
             name="itemName" 
             value={item.description} 
             placeholder='Item Name'
-            onChange={handleDescriptionChange}
+            onChange={event => handleDescriptionChange(event)}
             />
             
           
@@ -63,35 +65,38 @@ function ItemCreator(props) {
           {variationFields.map((input, index) => {
             return (
               <div key={index} className="variationContainer">
-                <label htmlFor="itemVariationName">Item Variation Name:</label>
-                <input 
-                  type="text" 
-                  className="itemVariationName" 
-                  name="itemVariationName" 
-                  placeholder='Item Variation Name'
-                  defaultValue={item.description}
-                  onChange={event => handleFormChange(index, event)}
-                />
+                <div className='itemVariationName'>
+                  <label htmlFor="itemVariationName">Item Variation Name</label>
+                  <input 
+                    type="text"
+                    name="itemVariationName" 
+                    placeholder='Item Variation Name'
+                    defaultValue={item.description}
+                    onChange={event => handleFormChange(index, event)}
+                  />
+                </div>
+                
+                <div className='itemDetails'>
+                  <label htmlFor="itemVariationPrice">Item Variation Price:</label>
+                  <input 
+                    type="number" 
+                    className="itemVariationPrice" 
+                    name="itemVariationPrice" 
+                    placeholder='Price'
+                    defaultValue={item.msrp}
+                    onChange={event => handleFormChange(index, event)}
+                  />
 
-                <label htmlFor="itemVariationPrice">Item Variation Price:</label>
-                <input 
-                  type="number" 
-                  className="itemVariationPrice" 
-                  name="itemVariationPrice" 
-                  placeholder='Price'
-                  defaultValue={item.msrp}
-                  onChange={event => handleFormChange(index, event)}
-                />
-
-                <label htmlFor="itemVariationSKU">Item Variation SKU:</label>
-                <input 
-                  type="text" 
-                  className="itemVariationSKU" 
-                  name="itemVariationSKU" 
-                  placeholder='SKU'
-                  value={item.sku}
-                  onChange={event => handleFormChange(index, event)}
-                />
+                  <label htmlFor="itemVariationSKU">Item Variation SKU:</label>
+                  <input 
+                    type="text" 
+                    className="itemVariationSKU" 
+                    name="itemVariationSKU" 
+                    placeholder='SKU'
+                    value={item.sku}
+                    onChange={event => handleFormChange(index, event)}
+                  />
+                </div>
 
                 <button 
                   className='deleteVariationButton' 
@@ -106,10 +111,6 @@ function ItemCreator(props) {
           }
           )}
           <button className='addVariationButton' onClick={addVariation}>Add Variation</button>
-
-          <button 
-            className='verifyItemButton'
-            onClick={submit}>Item Looks Good!</button>
         </form>
     </div>
   )

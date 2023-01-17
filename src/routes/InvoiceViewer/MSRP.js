@@ -15,6 +15,8 @@ function MSRP(props) {
     }, [])
 
     async function compareMsrp() {
+        /////if returned is none then display warning no listed MSRP
+        /////if returned MSRP is larger than current MSRP display warning
         if (storedMsrp == 0) {
             const vendorMsrp = await getItemMsrp(vendor, itemSku)
             console.log(vendorMsrp)

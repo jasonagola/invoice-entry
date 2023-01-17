@@ -13,47 +13,47 @@ const app = express();
 app.use(cors())
 
 
-const { Client, Envirnment, Environment } = require('square');
+// const { Client, Environment } = require('square');
 const { default: axios } = require('axios');
 
-const client = new Client({
-    accessToken: process.env.SQUARE_ACCESS_TOKEN,
-    environment: Environment.Production
-});
+// const client = new Client({
+//     accessToken: process.env.SQUARE_ACCESS_TOKEN,
+//     environment: Environment.Production
+// });
 
 
 app.listen(PORT, () => console.log(`Square Backend is Running on Port:${PORT}`))
 
-app.get('/listItems', async (req, res) => {
-    try {
-        const response = await client.catalogApi.listCatalog();
-        console.log(response.result)
-        res.send(response.result)
-    } catch(error) {
-        console.log(error)
-    }
-})
+// app.get('/listItems', async (req, res) => {
+//     try {
+//         const response = await client.catalogApi.listCatalog();
+//         console.log(response.result)
+//         res.send(response.result)
+//     } catch(error) {
+//         console.log(error)
+//     }
+// })
 
-app.get('/searchItem', async (req, res) => {
-    try {
-        const searchTerm = req.query.search
-        console.log(searchTerm)
-        console.log(`Searching with "${searchTerm}" from input field`)
-        const response = await client.catalogApi.searchCatalogItems({
-            textFilter: searchTerm,
-            productTypes: [
-                'REGULAR'
-            ]
-        });
-        // const resposneString = JSON.stringify(response).result
-        const responseString = JSONBig.stringify(response.result.items)
-        res.send(responseString)
-        console.log(response)
+// app.get('/searchItem', async (req, res) => {
+//     try {
+//         const searchTerm = req.query.search
+//         console.log(searchTerm)
+//         console.log(`Searching with "${searchTerm}" from input field`)
+//         const response = await client.catalogApi.searchCatalogItems({
+//             textFilter: searchTerm,
+//             productTypes: [
+//                 'REGULAR'
+//             ]
+//         });
+//         // const resposneString = JSON.stringify(response).result
+//         const responseString = JSONBig.stringify(response.result.items)
+//         res.send(responseString)
+//         console.log(response)
         
-    } catch(error) {
-        console.log(error)
-    }
-})
+//     } catch(error) {
+//         console.log(error)
+//     }
+// })
 
 
 ///////Scraping

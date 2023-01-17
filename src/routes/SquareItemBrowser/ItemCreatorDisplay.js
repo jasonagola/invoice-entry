@@ -36,9 +36,8 @@ function ItemCreatorDisplay(props) {
         setItemFields(data)
     }
 
-    const submit = (e) => {
-        e.preventDefault();
-        console.log(itemFields)
+    const submit = (index, e) => {
+        console.log(itemFields[index])
     }
 
     return (
@@ -52,6 +51,9 @@ function ItemCreatorDisplay(props) {
                                 className="itemDeleteButton"
                                 onClick={() => removeItem(index)}>Delete Item
                             </button>
+                            <button 
+                                className='verifyItemButton'
+                                onClick={() => submit(index)}>Item Looks Good!</button>
                         </div>
                     )
                 })}
