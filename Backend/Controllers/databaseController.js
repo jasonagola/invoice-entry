@@ -1,4 +1,4 @@
-const db = require('./databaseConfig')
+const db = require('../databaseConfig')
 
 ///////////////////Database Queries
 //////////Invoice Table
@@ -13,10 +13,11 @@ const getAllDatabaseInvoices = (req, res) => {
             res.send(result)
         }
     })
-})
+}
 
 ///Post New Invoice
-app.put('/db/invoices/insert', (req, res) => {
+// app.put('/db/invoices/insert', (req, res) => {
+const addInvoice = (req, res) => {
     console.log('Backend Attempting to add new invoice')
     const {invoiceId, vendor, invoiceDate, invoiceTotal, processed} = req.query
     db.query(
@@ -30,11 +31,12 @@ app.put('/db/invoices/insert', (req, res) => {
             res.send(result)
         }
     }) 
-})
+}
 ///Change Invoice Processed State
 
 //////////Status Table
-app.get('/db/status/invoiceScraper', (req, res) => {
+// app.get('/db/status/invoiceScraper', 
+const getInvoiceScraperStatus = (req, res) => {
     console.log('Getting Status of Invoice Scraper')
     db.query("SELECT * FROM Status WHERE function = 'invoiceScraper'",
     (err, result) => {
@@ -47,19 +49,21 @@ app.get('/db/status/invoiceScraper', (req, res) => {
             res.send(result)
         }
     })
-})
+}
 
 //////////Bike Table
-app.get("/db/get", (req, res) => {
+// app.get("/db/get", 
+const getBikes = (req, res) => {
     db.query("SELECT * FROM Bikes", (err, result) => {
         if (err) {
             console.log(err)
         }
     res.send(result)
     })
-})
+}
 
-app.put("/db/newBike", (req, res) => {
+// app.put("/db/newBike", 
+const addBike = (req, res) => {
     const color = req.query.color
     const make = req.query.make
     const model = req.query.model
@@ -74,9 +78,14 @@ app.put("/db/newBike", (req, res) => {
           }
         }
       );
-    });
+    }
 
 
 module.exports = {
-    getAllDatabaseInvoices
+    getAllDatabaseInvoices, 
+    addInvoice, 
+    getInvoiceScraperStatus,
+    getBikes, 
+    addBike
+
 }

@@ -1,5 +1,4 @@
-const { Client, Environment, Environment } = require('square');
-const { catalogItemVariationSchema } = require('square/dist/models/catalogItemVariation');
+const { Client, Environment }  = require('square');
 const client = new Client({
     accessToken: process.env.SQUARE_ACCESS_TOKEN,
     environment: Environment.Production
@@ -7,7 +6,7 @@ const client = new Client({
 
 
 // app.get('/listItems', async (req, res) => {
-const listItems = async (req, res) => {
+const listAllItems = async (req, res) => {
     try {
         const response = await client.catalogApi.listCatalog();
         console.log(response.result)
@@ -92,7 +91,7 @@ const createItem = async (req, res) => {
 }
 
 module.exports = {
-    listItems, 
+    listAllItems, 
     searchItems, 
     createItem
 

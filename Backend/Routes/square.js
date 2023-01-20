@@ -1,12 +1,11 @@
 const express = require('express')
 const router = express.Router();
-const squareController = require('../Controllers/square')
+const squareController = require('../controllers/squareController')
 
-router.route('/square')
-    console.log('You have hit the square route')
-    .get('/searchItems', )
-    .get('/listAllItems')
-    .post('./createItem')
+router.route('/items')
+    // .get('/searchItems', squareController.searchItems)
+    // .get('/listAllItems', squareController.listAllItems)
+    // .post('/createItem', squareController.createItem)
 
 
 module.exports = router
