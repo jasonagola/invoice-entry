@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { useSelector } from 'react-redux';
 import { getLoadedInvoice } from '../../store/loadedInvoice/loadedInvoiceSlice';
-import ItemCreator from './createNewItem';
+import Variations from './Variations';
 import './ItemCreatorDisplay.css'
 
 function ItemCreatorDisplay(props) {
     const items = Object.values(useSelector(getLoadedInvoice))
-    console.log(items)
+
+    
     
     useEffect(() => {  
         setItemFields(items)
@@ -26,8 +27,6 @@ function ItemCreatorDisplay(props) {
             itemName: '',
         }
         setItemFields([...itemFields, newItem])
-
-
     }
 
     const removeItem = (index) => {
@@ -40,20 +39,25 @@ function ItemCreatorDisplay(props) {
         console.log(itemFields[index])
     }
 
+    const getItemVariations = (variationState) => {
+        return variationState
+    }
+
+
+    ////move variation state up to this componetnt and then pass callback functions to the child component 
+    
     return (
         <div className="itemCreatorDisplay">
                 
                 {itemFields.map((input, index) => {
                     return (
                         <div key={index} className='itemBox'>
-                            <ItemCreator item={input}/>
+                            <Variations item={input}/>
                             <button 
                                 className="itemDeleteButton"
                                 onClick={() => removeItem(index)}>Delete Item
                             </button>
-                            <button 
-                                className='verifyItemButton'
-                                onClick={() => submit(index)}>Item Looks Good!</button>
+                           
                         </div>
                     )
                 })}

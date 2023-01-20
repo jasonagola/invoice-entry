@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors')
 const db = require('./databaseConfig')
 require('dotenv').config()
-
+const squareRoute = require('./routes/square')
 
 
 const PORT = 8000
@@ -23,6 +23,7 @@ const { default: axios } = require('axios');
 
 
 app.listen(PORT, () => console.log(`Square Backend is Running on Port:${PORT}`))
+app.use('/square', squareRoute)
 
 // app.get('/listItems', async (req, res) => {
 //     try {
@@ -54,6 +55,9 @@ app.listen(PORT, () => console.log(`Square Backend is Running on Port:${PORT}`))
 //         console.log(error)
 //     }
 // })
+app.get('/', (req, res) => {
+    res.send('You have hit the backend')
+})
 
 
 ///////Scraping

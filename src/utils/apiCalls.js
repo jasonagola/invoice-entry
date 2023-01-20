@@ -2,36 +2,11 @@
 import axios from 'axios';
 import { qbpMsrpFromXML } from './qbpInvoiceHelpers';
 
-const devServer = 'http://localhost:8000'
+const backendUrl = process.env.REACT_APP_BACKEND_URL
+console.log(backendUrl)
 
 //search for Item with string
-export async function searchItem(searchString) {
-    const options = {
-        method: 'GET', 
-        url: 'http://localhost:8000/searchItem', 
-        params: {
-            search: searchString
-        }
-    };
 
-    const responseBody = await axios.request(options)
-    ///Can Retrieve Item Data for Each Item Listed
-    const responseObject = {}
-    // console.log(responseBody.data)
-    Object.values(responseBody.data).forEach((item) => {
-        responseObject[item.id] = item.itemData
-    })
-    return responseObject
-}
-
-//Create Catalog Object
-export async function createNewCatalogObject() {
-    const options = {
-        method: 'GET',
-        url: 'http://localhost:8000/newCatalogItem',
-        params: {}
-    }
-}
 
 
 
@@ -39,61 +14,61 @@ export async function createNewCatalogObject() {
 ///Puppeteer Node Server
 
 ///Load Invoice
-export async function LoadInvoice(invoiceUrl) {
-    console.log(invoiceUrl)
-    const options = {
-        method: 'GET',
-        url: 'http://localhost:8100/authorizeQBP',
-        params: {
-            url: invoiceUrl,
-            // cookies: cookiesQBP
-        }
-    }
-    const response = await axios.request(options)
-        try {
-            console.log(response)
-            // parseInvoice(response.data)
-            return response.data
-        } catch(error) {
-            console.log(error)
-        }
- }
+// export async function LoadInvoice(invoiceUrl) {
+//     console.log(invoiceUrl)
+//     const options = {
+//         method: 'GET',
+//         url: 'http://localhost:8100/authorizeQBP',
+//         params: {
+//             url: invoiceUrl,
+//             // cookies: cookiesQBP
+//         }
+//     }
+//     const response = await axios.request(options)
+//         try {
+//             console.log(response)
+//             // parseInvoice(response.data)
+//             return response.data
+//         } catch(error) {
+//             console.log(error)
+//         }
+//  }
 
- ////getPrice
- export async function getPrices(invoice) {
-    const options = {
-        method: 'GET',
-        url: 'http://localhost:8100/getPrices',
-        params: {
-            invoice: invoice
-        }
-    }
-    const response = await axios.request(options)
-        try {
-            console.log(response)
-            return response.data
-        } catch(error) {
-            console.log(error)
-        }
- }
+//  ////getPrice
+//  export async function getPrices(invoice) {
+//     const options = {
+//         method: 'GET',
+//         url: 'http://localhost:8100/getPrices',
+//         params: {
+//             invoice: invoice
+//         }
+//     }
+//     const response = await axios.request(options)
+//         try {
+//             console.log(response)
+//             return response.data
+//         } catch(error) {
+//             console.log(error)
+//         }
+//  }
 
- ///loadJBIInvoices
+//  ///loadJBIInvoices
 
- export async function loadJBIInvoices() {
-     const url = devServer +'/JBI/Invoices'
-     console.log(url)
-     const options = {
-         method: 'GET',
-         url: url
-     }
-     const response = await axios.request(options)
-        try {
-            console.log(response.data)
-            return response.data
-        } catch(error) {
-            console.log(error)
-        }
- }
+//  export async function loadJBIInvoices() {
+//      const url = backendUrl +'/JBI/Invoices'
+//      console.log(url)
+//      const options = {
+//          method: 'GET',
+//          url: url
+//      }
+//      const response = await axios.request(options)
+//         try {
+//             console.log(response.data)
+//             return response.data
+//         } catch(error) {
+//             console.log(error)
+//         }
+//  }
 
 
 ////////////////////Database
@@ -102,7 +77,7 @@ export async function LoadInvoice(invoiceUrl) {
 export async function getAllDatabaseInvoices() {
     const options = {
         method: "GET",
-        url: devServer + '/db/invoices/getAll'
+        url: backendUrl + '/db/invoices/getAll'
     }
     const response = await axios.request(options)
         try {
@@ -129,7 +104,7 @@ export async function getAllDatabaseInvoices() {
 export async function insertNewInvoice(invoiceId, vendor, invoiceDate, invoiceTotal, processed) {
     const options = {
         method: 'PUT',
-            url: devServer + '/db/invoices/insert',
+            url: backendUrl + '/db/invoices/insert',
         params: {
             invoiceId: invoiceId,
             vendor: vendor,
@@ -150,7 +125,7 @@ export async function insertNewInvoice(invoiceId, vendor, invoiceDate, invoiceTo
 export async function getInvoiceScrapeStatus() {
     const options = {
         method: 'GET',
-        url: devServer + '/db/status/invoiceScraper'
+        url: backendUrl + '/db/status/invoiceScraper'
     }
     const response = await axios.request(options)
         try {
@@ -165,7 +140,7 @@ export async function getInvoiceScrapeStatus() {
 export async function insertNewBike(color, make, model) {
     const options ={
         method: 'PUT',
-        url: devServer + '/db/newBike', 
+        url: backendUrl + '/db/newBike', 
         params: {
             color: color, 
             make: make,
@@ -187,7 +162,7 @@ export async function getQbpBySku(sku) {
     try {
         const options = {
             method: "GET",
-            url: devServer + '/QBP/product/sku',
+            url: backendUrl + '/QBP/product/sku',
             params: {
                 sku: sku
             }
@@ -206,7 +181,7 @@ export async function getQbpInvoices(endDate, startDate) {
     try {
         const options = {
             method: "GET", 
-            url: devServer + '/QBP/invoices',
+            url: backendUrl + '/QBP/invoices',
             params: {
                 endDate: endDate,
                 startDate: startDate
@@ -224,7 +199,7 @@ export async function getQbpInvoiceByNumber(invoiceNumber) {
     try {
         const options = {
             method: 'GET',
-            url: devServer + '/QBP/invoices/number',
+            url: backendUrl + '/QBP/invoices/number',
             params: {
                 invoiceNumber: invoiceNumber
             }
@@ -241,7 +216,7 @@ export async function getItemMsrp(vendor, sku) {
     try {
         const options = {
             method: 'GET', 
-            url: devServer + `/${vendor}/itemMsrp`,
+            url: backendUrl + `/${vendor}/itemMsrp`,
             params: {
                 sku: sku
             }
@@ -268,7 +243,7 @@ export async function getInvoiceFromVendor(vendor, invoiceNumber) {
     try {
         const options = {
             method: 'GET',
-            url: devServer + vendorPath,
+            url: backendUrl + vendorPath,
             params: {
                 invoiceNumber: invoiceNumber
             }
