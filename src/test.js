@@ -7,7 +7,6 @@ function TestBehavior() {
         console.log(response)
         
     }
-
     return (
         <button onClick={runTest}>Run Test</button>
     )

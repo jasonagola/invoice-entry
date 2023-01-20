@@ -15,7 +15,9 @@ function InvoiceBrowser() {
     return (
         
         <div>
-            Invoice Browser
+            <h3>Invoice Details</h3>
+            <p>QBP: Currently QBP will be accessed automatically. There should be no need to manually add invoice from QBP</p>
+            <p>JBI: To add JBI invoice to the system upload .csv file available from JBI's order screen. You can verify there that the order is correct and at that time the invoice should be made available in the system.</p>
             <QueryQBP/>
             <DisplayDbInvoices/>
             <InvoiceReconciliation/>

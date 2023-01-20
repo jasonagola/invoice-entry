@@ -10,6 +10,7 @@ import InvoiceViewer, {invoiceLoader} from './routes/InvoiceViewer/InvoiceViewer
 import SquareItemBrowser from './routes/SquareItemBrowser/SquareItemBrowser';
 import reportWebVitals from './reportWebVitals';
 import Dashboard from './routes/Dashboard';
+import JBIUploader from './routes/JBIuploader';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
       {
         path: '/SquareItemBrowser',
         element: <SquareItemBrowser/>
-      }
+      }, 
+      {
+        path: '/JBIUploader',
+        element: <JBIUploader/>
+      } 
     ],
   },
   
